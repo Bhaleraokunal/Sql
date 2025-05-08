@@ -1,0 +1,185 @@
+--- WAQTD HIGHEST SALARY OF EMPLOYEE TABLE ?
+SQL> SELECT MAX(SAL)
+  2  FROM EMP;
+
+  MAX(SAL)                                                                                          
+----------                                                                                          
+      5000                                                                                          
+
+SQL> -- WAQTD HIGHEST SALARY,LEAST SALARY,TOTAL SALARY,AVARAGE SALARY WHICH IS FROM EMPLOYEE TABLE ?
+SQL> SELECT MAX(SAL),MIN(SAL),SUM(SAL),AVG(SAL)
+  2  FROM EMP;
+
+  MAX(SAL)   MIN(SAL)   SUM(SAL)   AVG(SAL)                                                         
+---------- ---------- ---------- ----------                                                         
+      5000        800      29025 2073.21429                                                         
+
+SQL> --WAQTD MAX SALARY, MIN SALARY , SOME OF SALARY IN DEPTNO 10,20 ?
+SQL> SELECT MAX(SAL), MIN(SAL), SUM(SAL)
+  2  FROM EMP
+  3  WHERE DEPTNO IN (10,20);
+
+  MAX(SAL)   MIN(SAL)   SUM(SAL)                                                                    
+---------- ---------- ----------                                                                    
+      5000        800      19625                                                                    
+
+SQL> -- WAQTD MAX SALARY, MIN SALARY, AVG SALARY IF THE EMPLOYEE ARE WORKING IN THE DEPARTMENT NO 10--2O AND GETTING MAX SAL MORE THAN 2000?
+SQL> SELECT MAX(SAL), MIN (SAL), AVG(SAL)
+  2  FROM EMP
+  3  WHERE DEPTNO IN(10,20) AND MAX(SAL) > 2000;
+WHERE DEPTNO IN(10,20) AND MAX(SAL) > 2000
+                           *
+ERROR at line 3:
+ORA-00934: group function is not allowed here 
+
+
+SQL> -- REASON : BECAUSE THE WHERE CLASUE EXECUTE ROW BY ROW AND THE MULTI ROW FUNCTION (MRF) IS EXE--ECUTE GROUP BY GROUP.
+SQL> 
+SQL> --WAQTD MAX SAL, MIN SAL, AVG OF SAL IT THE EMPLOYEE ARE WROKING IN THE DEPTNO IN 10,20 AND GET--ETTIN MAX SAL MORE THAN 200
+SQL> 
+SQL> 
+SQL> 
+SQL> --WAQTD MAX SAL, MIN SAL, ENAME IF THE NAME START WITH A ?
+SQL> SELECT MAX(SAL), MIN(SAL), ENAME
+  2  FROM EMP
+  3  WHERE ENAME LIKE 'A%';
+SELECT MAX(SAL), MIN(SAL), ENAME
+                           *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> -- REASON : THE MRF EXECUTE GROUP BY GROUP AND GENRATE THE SINGLE OUTPUT WHERE A NORMAL CLOUMN --EXECUTE ROW BY ROW AND GENRATE MULTIPLE OUTPUT.
+SQL> 
+SQL> 
+SQL> -- WAQTD MAX SAL, MIN SAL, MAX COM, MIN COMM IN DEPT NO 10,20 ?
+SQL> SELECT MAX(SAL),MIN(SAL),MAX(COMM),MIN(SAL)
+  2  FROM EMP
+  3  WHERE DEPTNO IN(10,20);
+
+  MAX(SAL)   MIN(SAL)  MAX(COMM)   MIN(SAL)                                                         
+---------- ---------- ---------- ----------                                                         
+      5000        800                   800                                                         
+
+SQL> --NOTE: IF THE NULL GROUP IS COMPARE WITH SOMETHIN GRUOP THE OUTPUT IS NULL THAT WAY THE MRF NE--NEGLECT THE NULL VALUE
+SQL> 
+SQL> 
+SQL> --WAQTD MAX OF MIN OF SAL WHICH IS FROM THE EMP TABLE ?
+SQL> 
+SQL> SELECT MAX(MIN(SAL)
+  2  FROM EMP;
+FROM EMP
+*
+ERROR at line 2:
+ORA-00907: missing right parenthesis 
+
+
+SQL> SELECT MAX(MIN(SAL))
+  2  FROM EMP;
+SELECT MAX(MIN(SAL))
+           *
+ERROR at line 1:
+ORA-00978: nested group function without GROUP BY 
+
+
+SQL> --  REASON FIRSTLY THE INNER FUNCTION EXECUTE AND GENRATE SINGLE OUTPUT WHICH CAN'T BE A INPUT -- FOR OUTER MRF
+SQL> 
+SQL> 
+SQL> --WAQTD MAX SAL, MIN SAL SUM OF SAL IN DEPTNO 10, 20?
+SQL> SELECT MAX (SAL), MIN(SAL), SUM(SAL)
+  2  FROM EMP
+  3  WHERE DEPTNO IN (10,20);
+
+  MAX(SAL)   MIN(SAL)   SUM(SAL)                                                                    
+---------- ---------- ----------                                                                    
+      5000        800      19625                                                                    
+
+SQL> --WAQTD MAX SAL, MIN SAL, AVG SAL IF TH EMPLOYEE ARE WORKING IN THE DEPTNO 10,20 AND GETTING MA--MAX SAL MORE THAN 2000 ?
+SQL> SELECT MAX(SAL), MIN(SAL),AVG(SAL)
+  2  FROM EMP
+  3  WHERE DEPTNO IN (10,20) AND MAX(SAL) >2000;
+WHERE DEPTNO IN (10,20) AND MAX(SAL) >2000
+                            *
+ERROR at line 3:
+ORA-00934: group function is not allowed here 
+
+
+SQL> -- REASON FOR THIS : You wrote MAX(sal) > 2000 inside the WHERE clause.
+SQL> --But WHERE can only check simple values (not group totals).
+SQL> --MAX(sal) is a group total, so SQL gives an error.
+SQL> 
+SQL> 
+SQL> SELECT MIN(ENAME),MAX(ENAME),MAX(HIREDATE),MIN(HIREDATE)
+  2  FROM EMP;
+
+MIN(ENAME) MAX(ENAME) MAX(HIRED MIN(HIRED                                                           
+---------- ---------- --------- ---------                                                           
+ADAMS      WARD       23-MAY-87 17-DEC-80                                                           
+
+SQL> 
+SQL> 
+SQL> SELECT MAX(SAL,COMM)
+  2  FROM EMP;
+SELECT MAX(SAL,COMM)
+       *
+ERROR at line 1:
+ORA-00909: invalid number of arguments 
+
+
+SQL> --REASON FOR THIS ERROR :The MAX() function can only accept one argument at a time, but you tri--ed to pass two (sal,comm)
+SQL> 
+SQL> 
+SQL> 
+SQL> select max(sal+comm)
+  2  from emp;
+
+MAX(SAL+COMM)                                                                                       
+-------------                                                                                       
+         2650                                                                                       
+
+SQL> --REASON WHY HERE IS NO ERROR "INSTED OF PASS TWO ARGUMENT WE JUST PASS AN ONE WHICH A SINGLE O--OPERAND
+SQL> 
+SQL> 
+SQL> --WAQTD SELECT COUNT OF *, COUNT OF ENAME, COUNT OF JOB , COUNT OF ENAME AND COUNT OF COMM?
+SQL> SELECT COUNT(*),COUNT, COUNT(ENAME), COUNT(JOB),COUNT (ENAME), COUNT (COMM)
+  2  FROM EMP;
+SELECT COUNT(*),COUNT, COUNT(ENAME), COUNT(JOB),COUNT (ENAME), COUNT (COMM)
+                *
+ERROR at line 1:
+ORA-00904: "COUNT": invalid identifier 
+
+
+SQL> edit
+Wrote file afiedt.buf
+
+  1  SELECT COUNT(*),COUNT(ENAME), COUNT(JOB),COUNT (ENAME), COUNT (COMM)
+  2* FROM EMP
+SQL> edit
+Wrote file afiedt.buf
+
+  1  SELECT COUNT(*),COUNT(ENAME), COUNT(JOB),COUNT (ENAME), COUNT (COMM)
+  2* FROM EMP
+SQL> ;
+  1  SELECT COUNT(*),COUNT(ENAME), COUNT(JOB),COUNT (ENAME), COUNT (COMM)
+  2* FROM EMP
+SQL> ;
+  1  SELECT COUNT(*),COUNT(ENAME), COUNT(JOB),COUNT (ENAME), COUNT (COMM)
+  2* FROM EMP
+SQL> 
+SQL> 
+SQL> SELECT COUNT(*), COUNT (ENMAE), COUNT (JOB), COUNT (ENMAE),COUNT (COMM)
+  2  FROM EMP;
+SELECT COUNT(*), COUNT (ENMAE), COUNT (JOB), COUNT (ENMAE),COUNT (COMM)
+                                                    *
+ERROR at line 1:
+ORA-00904: "ENMAE": invalid identifier 
+
+
+SQL> SELECT COUNT (*), COUNT (ENAME), COUNT (JOB), COUNT(ENAME),COUNT(COMM)
+  2  FROM EMP;
+
+  COUNT(*) COUNT(ENAME) COUNT(JOB) COUNT(ENAME) COUNT(COMM)                                         
+---------- ------------ ---------- ------------ -----------                                         
+        14           14         14           14           4                                         
+
+SQL> 

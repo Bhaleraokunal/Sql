@@ -1,0 +1,140 @@
+SQL*Plus: Release 10.2.0.1.0 - Production on Tue May 6 10:47:43 2025
+
+Copyright (c) 1982, 2005, Oracle.  All rights reserved.
+
+Enter user-name: scott
+Enter password: *****
+
+Connected to:
+Oracle Database 10g Enterprise Edition Release 10.2.0.1.0 - Production
+With the Partitioning, OLAP and Data Mining options
+
+SQL> select *
+  2  from dept
+  3  where deptno = (select deptno
+  4  from emp
+  5  where sal = 5000);
+
+    DEPTNO DNAME          LOC
+---------- -------------- -------------
+        10 ACCOUNTING     NEW YORK
+
+SQL> select *
+  2  from dept
+  3  where deptno = ( select deptno
+  4  from emp
+  5  where sal > ( select sal
+  6  from emp
+  7  where ename = 'smith'));
+
+no rows selected
+
+SQL> select *
+  2  from dept
+  3  where deptno = (select deptno
+  4  from emp
+  5  where sal > (select sal 
+  6  from emp
+  7  where ename = 'SMITH'));
+where deptno = (select deptno
+                *
+ERROR at line 3:
+ORA-01427: single-row subquery returns more than one row
+
+
+SQL> SELECT *
+  2  FROM DEPT
+  3  WHERE DEPTNO IN ( SELECT DEPTNO 
+  4                     FROM EMP
+  5                     WHERE HIRDATE > ( SELECT HIREDATE 
+  6                                         FROM EMP
+  7                                           WHERE ENAME = 'BLAKE' AND JOB = ( SELECT JOB 
+  8                                                                               FROM EMP 
+  9                                                                               WHERE ENAME = 'MIL
+LER')));
+                   WHERE HIRDATE > ( SELECT HIREDATE
+                         *
+ERROR at line 5:
+ORA-00904: "HIRDATE": invalid identifier
+
+
+SQL> SELECT MAX(SAL),MIN(SAL),JOB
+  2  FROM EMP
+  3  WHERE DEPTNO IN ( SELECT DEPTNO
+  4                    FROM DEPT
+  5                    WHERE LOC = 'CHICAGO')
+  6  GROUP BY JOB;
+
+  MAX(SAL)   MIN(SAL) JOB
+---------- ---------- ---------
+      1600       1250 SALESMAN
+       950        950 CLERK
+      2850       2850 MANAGER
+
+SQL> -WAQTD NUMBER OF LOCATIONS IF THE EMPLOYESS ARE WORKING AS MANAGER ?
+SP2-0734: unknown command beginning "-WAQTD NUM..." - rest of line ignored.
+SQL> 
+SQL> SELECT COUNT(LOC)
+  2  FROM DEPT
+  3  WHERE DEPTNO IN (SELECT DEPTNO 
+  4                    FROM EMP
+  5                    WHERE JOB = 'MANAGER');
+
+COUNT(LOC)
+----------
+         3
+
+SQL> 
+SQL> ---WAQDT ALL THA DATAIAS OF EMPLOYESS IF THE WMPLOTEES ARE GETTING SAL MORE THAN ALL THE MANAGE
+-- SAL ?
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  
+SQL> 
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE SAL > ( SELECT MAX(SAL)
+  4                FROM EMP
+  5                WHERE JOB = 'MANAGER');
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000
+        20
+
+      7839 KING       PRESIDENT            17-NOV-81       5000
+        10
+
+      7902 FORD       ANALYST         7566 03-DEC-81       3000
+        20
+
+
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE SAL > ( SELECT MAX(SAL)
+  4                   FROM EMP
+  5                    WHERE JOB = 'MANAGER'
+  6                      GROUP BY MANAGER);
+                    GROUP BY MANAGER)
+                             *
+ERROR at line 6:
+ORA-00904: "MANAGER": invalid identifier
+
+
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE SAL > ( SELECT MAX(SAL), JOB
+  4                 FROM EMP
+  5                 WHERE JOB = 'MANAGER'
+  6                 GROUP BY JOB);
+WHERE SAL > ( SELECT MAX(SAL), JOB
+              *
+ERROR at line 3:
+ORA-00913: too many values

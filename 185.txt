@@ -1,0 +1,516 @@
+SQL> 
+SQL> --Q1)
+SQL> 
+SQL> select ename ,sal
+  2  from emp;
+
+ENAME             SAL
+---------- ----------
+SMITH             800
+ALLEN            1600
+WARD             1250
+JONES            2975
+MARTIN           1250
+BLAKE            2850
+CLARK            2450
+SCOTT            3000
+KING             5000
+TURNER           1500
+ADAMS            1100
+JAMES             950
+FORD             3000
+MILLER           1300
+
+14 rows selected.
+
+SQL> --Q2)
+SQL> 
+SQL> select * from dept;
+
+    DEPTNO DNAME          LOC
+---------- -------------- -------------
+        10 ACCOUNTING     NEW YORK
+        20 RESEARCH       DALLAS
+        30 SALES          CHICAGO
+        40 OPERATIONS     BOSTON
+
+SQL> select dname,loc
+  2  from dept;
+
+DNAME          LOC
+-------------- -------------
+ACCOUNTING     NEW YORK
+RESEARCH       DALLAS
+SALES          CHICAGO
+OPERATIONS     BOSTON
+
+SQL> 
+SQL> --Q3) 
+SQL> select ename, sal, comm, hiredate
+  2  from emp;
+
+ENAME             SAL       COMM HIREDATE
+---------- ---------- ---------- ---------
+SMITH             800            17-DEC-80
+ALLEN            1600        300 20-FEB-81
+WARD             1250        500 22-FEB-81
+JONES            2975            02-APR-81
+MARTIN           1250       1400 28-SEP-81
+BLAKE            2850            01-MAY-81
+CLARK            2450            09-JUN-81
+SCOTT            3000            19-APR-87
+KING             5000            17-NOV-81
+TURNER           1500          0 08-SEP-81
+ADAMS            1100            23-MAY-87
+JAMES             950            03-DEC-81
+FORD             3000            03-DEC-81
+MILLER           1300            23-JAN-82
+
+14 rows selected.
+
+SQL> 
+SQL> 
+SQL> --Q4)
+SQL> select ename , job, mgr
+  2  from emp;
+
+ENAME      JOB              MGR
+---------- --------- ----------
+SMITH      CLERK           7902
+ALLEN      SALESMAN        7698
+WARD       SALESMAN        7698
+JONES      MANAGER         7839
+MARTIN     SALESMAN        7698
+BLAKE      MANAGER         7839
+CLARK      MANAGER         7839
+SCOTT      ANALYST         7566
+KING       PRESIDENT
+TURNER     SALESMAN        7698
+ADAMS      CLERK           7788
+JAMES      CLERK           7698
+FORD       ANALYST         7566
+MILLER     CLERK           7782
+
+14 rows selected.
+
+SQL> 
+SQL> 
+SQL> --Q5)
+SQL> select ename,deptno
+  2  from emp;
+
+ENAME          DEPTNO
+---------- ----------
+SMITH              20
+ALLEN              30
+WARD               30
+JONES              20
+MARTIN             30
+BLAKE              30
+CLARK              10
+SCOTT              20
+KING               10
+TURNER             30
+ADAMS              20
+JAMES              30
+FORD               20
+MILLER             10
+
+14 rows selected.
+
+SQL> 
+SQL> 
+SQL> --Q6) 
+SQL> 
+SQL> select *
+  2  from emp;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10
+
+14 rows selected.
+
+SQL> 
+SQL> 
+SQL> --Q7)
+SQL> 
+SQL> select * 
+  2  from dept;
+
+    DEPTNO DNAME          LOC
+---------- -------------- -------------
+        10 ACCOUNTING     NEW YORK
+        20 RESEARCH       DALLAS
+        30 SALES          CHICAGO
+        40 OPERATIONS     BOSTON
+
+SQL> 
+SQL> 
+SQL> --Q8) 
+SQL> 
+SQL> select ename,empno,sal, sal*12
+  2  from emp;
+
+ENAME           EMPNO        SAL     SAL*12
+---------- ---------- ---------- ----------
+SMITH            7369        800       9600
+ALLEN            7499       1600      19200
+WARD             7521       1250      15000
+JONES            7566       2975      35700
+MARTIN           7654       1250      15000
+BLAKE            7698       2850      34200
+CLARK            7782       2450      29400
+SCOTT            7788       3000      36000
+KING             7839       5000      60000
+TURNER           7844       1500      18000
+ADAMS            7876       1100      13200
+JAMES            7900        950      11400
+FORD             7902       3000      36000
+MILLER           7934       1300      15600
+
+14 rows selected.
+
+SQL> 
+SQL> 
+SQL> --Q9)
+SQL> 
+SQL> select ename,empno,sal+sal*30/100
+  2  from emp;
+
+ENAME           EMPNO SAL+SAL*30/100
+---------- ---------- --------------
+SMITH            7369           1040
+ALLEN            7499           2080
+WARD             7521           1625
+JONES            7566         3867.5
+MARTIN           7654           1625
+BLAKE            7698           3705
+CLARK            7782           3185
+SCOTT            7788           3900
+KING             7839           6500
+TURNER           7844           1950
+ADAMS            7876           1430
+JAMES            7900           1235
+FORD             7902           3900
+MILLER           7934           1690
+
+14 rows selected.
+
+SQL> 
+SQL> 
+SQL> --Q10)
+SQL> 
+SQL> select ename
+  2  from emp;
+
+ENAME
+----------
+SMITH
+ALLEN
+WARD
+JONES
+MARTIN
+BLAKE
+CLARK
+SCOTT
+KING
+TURNER
+ADAMS
+JAMES
+FORD
+MILLER
+
+14 rows selected.
+
+SQL> 
+SQL> --Q11)
+SQL> 
+SQL> select ename, sal*12 as "Annual sal", sal+200
+  2  from emp;
+
+ENAME      Annual sal    SAL+200
+---------- ---------- ----------
+SMITH            9600       1000
+ALLEN           19200       1800
+WARD            15000       1450
+JONES           35700       3175
+MARTIN          15000       1450
+BLAKE           34200       3050
+CLARK           29400       2650
+SCOTT           36000       3200
+KING            60000       5200
+TURNER          18000       1700
+ADAMS           13200       1300
+JAMES           11400       1150
+FORD            36000       3200
+MILLER          15600       1500
+
+14 rows selected.
+
+SQL> 
+SQL> 
+SQL> --Q12)
+SQL> select ename ,sal ,sal*12, sal*12+1000
+  2  from emp;
+
+ENAME             SAL     SAL*12 SAL*12+1000
+---------- ---------- ---------- -----------
+SMITH             800       9600       10600
+ALLEN            1600      19200       20200
+WARD             1250      15000       16000
+JONES            2975      35700       36700
+MARTIN           1250      15000       16000
+BLAKE            2850      34200       35200
+CLARK            2450      29400       30400
+SCOTT            3000      36000       37000
+KING             5000      60000       61000
+TURNER           1500      18000       19000
+ADAMS            1100      13200       14200
+JAMES             950      11400       12400
+FORD             3000      36000       37000
+MILLER           1300      15600       16600
+
+14 rows selected.
+
+SQL> 
+SQL> 
+SQL> --Q13) 
+SQL> 
+SQL> select sal
+  2  from emp
+  3  where sal > 1500;
+
+       SAL
+----------
+      1600
+      2975
+      2850
+      2450
+      3000
+      5000
+      3000
+
+7 rows selected.
+
+SQL> 
+SQL> 
+SQL> --Q14)
+SQL> 
+SQL> select  ename,hiredate,sal,sal*12 as "Annual sal"
+  2  from emp
+  3  where sal*12 >10000;
+
+ENAME      HIREDATE         SAL Annual sal
+---------- --------- ---------- ----------
+ALLEN      20-FEB-81       1600      19200
+WARD       22-FEB-81       1250      15000
+JONES      02-APR-81       2975      35700
+MARTIN     28-SEP-81       1250      15000
+BLAKE      01-MAY-81       2850      34200
+CLARK      09-JUN-81       2450      29400
+SCOTT      19-APR-87       3000      36000
+KING       17-NOV-81       5000      60000
+TURNER     08-SEP-81       1500      18000
+ADAMS      23-MAY-87       1100      13200
+JAMES      03-DEC-81        950      11400
+FORD       03-DEC-81       3000      36000
+MILLER     23-JAN-82       1300      15600
+
+13 rows selected.
+
+SQL> 
+SQL> 
+SQL> --Q15) 
+SQL> select *
+  2  from emp
+  3  where deptno = 20;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20
+
+SQL> 
+SQL> 
+SQL> --Q16)
+SQL> 
+SQL> select * 
+  2  from emp
+  3  where job = ' MANAGER';
+
+no rows selected
+
+SQL> select *
+  2  from emp
+  3  where job = 'manager';
+
+no rows selected
+
+SQL> select *
+  2  from emp
+  3  where job = 'MANAGER';
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10
+
+SQL> 
+SQL> 
+SQL> --Q17)
+SQL> 
+SQL> select *
+  2  from emp
+  3  where hiredate > = '1-JAN-1995';
+
+no rows selected
+
+SQL> select *
+  2  from emp
+  3  where year(hireate) > 1995;
+where year(hireate) > 1995
+      *
+ERROR at line 3:
+ORA-00904: "YEAR": invalid identifier
+
+
+SQL> select *
+  2  from emp
+  3  where hiredate >= '1-jan-1996';
+
+no rows selected
+
+SQL> 
+SQL> 
+SQL> 
+SQL> --Q18) 
+SQL> 
+SQL> select *
+  2  
+SQL> 
+SQL> 
+SQL> --Q19)
+SQL> 
+SQL> select *
+  2  from emp
+  3  where job = 'clerk';
+
+no rows selected
+
+SQL> select *
+  2  from emp
+  3  where job = 'CLERK';
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10
+
+SQL> 
+SQL> 
+SQL> 
+SQL> --Q20)
+SQL> 
+SQL> select dname,deptno
+  2  from dept
+  3  where loc = 'BOSTON';
+
+DNAME              DEPTNO
+-------------- ----------
+OPERATIONS             40
+
+SQL> 
+SQL> 
+SQL> 
+SQL> ---Q21)
+SQL> 
+SQL> select *
+  2  
+SQL> select *
+  2  from emp
+  3  where deptno = 10 ans sal > 2000;
+where deptno = 10 ans sal > 2000
+                  *
+ERROR at line 3:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select *
+  2  from em[
+  3  
+SQL> 
+SQL> 
+SQL> select *
+  2  from emp
+  3  where sal > 2000 and deptno = 10;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10
+
+SQL> 
+SQL> 
+SQL> --Q22)
+SQL> 
+SQL> select ename,sal,sal*12 as "Annual sal",sal+sal*25/100 as "25%"
+  2  from emp
+  3  where job= 'CLERK' and hiredate  = '16-JUNE-1982';
+
+no rows selected
+
+SQL> 
+SQL> 
+SQL> --Q23 ) 
+SQL> 
+SQL> 
+SQL> select *
+  2  from emp
+  3  where sal*12 > 15000 and comm > sal;
+
+no rows selected
+
+SQL> 
+SQL> 
+SQL> --Q24)
+SQL> 
+SQL> select *
+  2  from emo
+  3  
+SQL> 
+SQL> select *
+  2  from emp
+  3  
+SQL> 
+SQL> 
+SQL> select *
+  2  from dept
+  3  where deptno = 10 or dname = 'RESEARCH';
+
+    DEPTNO DNAME          LOC
+---------- -------------- -------------
+        10 ACCOUNTING     NEW YORK
+        20 RESEARCH       DALLAS
+
+SQL> 
+SQL> 
