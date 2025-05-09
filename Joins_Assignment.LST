@@ -1,0 +1,465 @@
+
+SQL> --Q1) . WAQTD ENAME, DENAME OF ALL THE EMPS
+SQL> 
+SQL> SELECT ENAME, DNAME
+  2  FROM EMP CROSS JOIN DEPT;
+
+ENAME      DNAME                                                                                                                                                                                        
+---------- --------------                                                                                                                                                                               
+SMITH      ACCOUNTING                                                                                                                                                                                   
+ALLEN      ACCOUNTING                                                                                                                                                                                   
+WARD       ACCOUNTING                                                                                                                                                                                   
+JONES      ACCOUNTING                                                                                                                                                                                   
+MARTIN     ACCOUNTING                                                                                                                                                                                   
+BLAKE      ACCOUNTING                                                                                                                                                                                   
+CLARK      ACCOUNTING                                                                                                                                                                                   
+SCOTT      ACCOUNTING                                                                                                                                                                                   
+KING       ACCOUNTING                                                                                                                                                                                   
+TURNER     ACCOUNTING                                                                                                                                                                                   
+ADAMS      ACCOUNTING                                                                                                                                                                                   
+JAMES      ACCOUNTING                                                                                                                                                                                   
+FORD       ACCOUNTING                                                                                                                                                                                   
+MILLER     ACCOUNTING                                                                                                                                                                                   
+SMITH      RESEARCH                                                                                                                                                                                     
+ALLEN      RESEARCH                                                                                                                                                                                     
+WARD       RESEARCH                                                                                                                                                                                     
+JONES      RESEARCH                                                                                                                                                                                     
+MARTIN     RESEARCH                                                                                                                                                                                     
+BLAKE      RESEARCH                                                                                                                                                                                     
+CLARK      RESEARCH                                                                                                                                                                                     
+SCOTT      RESEARCH                                                                                                                                                                                     
+KING       RESEARCH                                                                                                                                                                                     
+TURNER     RESEARCH                                                                                                                                                                                     
+ADAMS      RESEARCH                                                                                                                                                                                     
+JAMES      RESEARCH                                                                                                                                                                                     
+FORD       RESEARCH                                                                                                                                                                                     
+MILLER     RESEARCH                                                                                                                                                                                     
+SMITH      SALES                                                                                                                                                                                        
+ALLEN      SALES                                                                                                                                                                                        
+WARD       SALES                                                                                                                                                                                        
+JONES      SALES                                                                                                                                                                                        
+MARTIN     SALES                                                                                                                                                                                        
+BLAKE      SALES                                                                                                                                                                                        
+CLARK      SALES                                                                                                                                                                                        
+SCOTT      SALES                                                                                                                                                                                        
+KING       SALES                                                                                                                                                                                        
+TURNER     SALES                                                                                                                                                                                        
+ADAMS      SALES                                                                                                                                                                                        
+JAMES      SALES                                                                                                                                                                                        
+FORD       SALES                                                                                                                                                                                        
+MILLER     SALES                                                                                                                                                                                        
+SMITH      OPERATIONS                                                                                                                                                                                   
+ALLEN      OPERATIONS                                                                                                                                                                                   
+WARD       OPERATIONS                                                                                                                                                                                   
+JONES      OPERATIONS                                                                                                                                                                                   
+MARTIN     OPERATIONS                                                                                                                                                                                   
+BLAKE      OPERATIONS                                                                                                                                                                                   
+CLARK      OPERATIONS                                                                                                                                                                                   
+SCOTT      OPERATIONS                                                                                                                                                                                   
+KING       OPERATIONS                                                                                                                                                                                   
+TURNER     OPERATIONS                                                                                                                                                                                   
+ADAMS      OPERATIONS                                                                                                                                                                                   
+JAMES      OPERATIONS                                                                                                                                                                                   
+FORD       OPERATIONS                                                                                                                                                                                   
+MILLER     OPERATIONS                                                                                                                                                                                   
+
+56 rows selected.
+
+SQL> 
+SQL> 
+SQL> --Q2)  WAQTD EMPNO,NAME,JOB,LOC OF ALL THE EMPS
+SQL> 
+SQL> SELECT EMPNO,ENAME,JOB,LOC
+  2  FROM EMP CROSS JOIN DEPT;
+
+     EMPNO ENAME      JOB       LOC                                                                                                                                                                     
+---------- ---------- --------- -------------                                                                                                                                                           
+      7369 SMITH      CLERK     NEW YORK                                                                                                                                                                
+      7499 ALLEN      SALESMAN  NEW YORK                                                                                                                                                                
+      7521 WARD       SALESMAN  NEW YORK                                                                                                                                                                
+      7566 JONES      MANAGER   NEW YORK                                                                                                                                                                
+      7654 MARTIN     SALESMAN  NEW YORK                                                                                                                                                                
+      7698 BLAKE      MANAGER   NEW YORK                                                                                                                                                                
+      7782 CLARK      MANAGER   NEW YORK                                                                                                                                                                
+      7788 SCOTT      ANALYST   NEW YORK                                                                                                                                                                
+      7839 KING       PRESIDENT NEW YORK                                                                                                                                                                
+      7844 TURNER     SALESMAN  NEW YORK                                                                                                                                                                
+      7876 ADAMS      CLERK     NEW YORK                                                                                                                                                                
+      7900 JAMES      CLERK     NEW YORK                                                                                                                                                                
+      7902 FORD       ANALYST   NEW YORK                                                                                                                                                                
+      7934 MILLER     CLERK     NEW YORK                                                                                                                                                                
+      7369 SMITH      CLERK     DALLAS                                                                                                                                                                  
+      7499 ALLEN      SALESMAN  DALLAS                                                                                                                                                                  
+      7521 WARD       SALESMAN  DALLAS                                                                                                                                                                  
+      7566 JONES      MANAGER   DALLAS                                                                                                                                                                  
+      7654 MARTIN     SALESMAN  DALLAS                                                                                                                                                                  
+      7698 BLAKE      MANAGER   DALLAS                                                                                                                                                                  
+      7782 CLARK      MANAGER   DALLAS                                                                                                                                                                  
+      7788 SCOTT      ANALYST   DALLAS                                                                                                                                                                  
+      7839 KING       PRESIDENT DALLAS                                                                                                                                                                  
+      7844 TURNER     SALESMAN  DALLAS                                                                                                                                                                  
+      7876 ADAMS      CLERK     DALLAS                                                                                                                                                                  
+      7900 JAMES      CLERK     DALLAS                                                                                                                                                                  
+      7902 FORD       ANALYST   DALLAS                                                                                                                                                                  
+      7934 MILLER     CLERK     DALLAS                                                                                                                                                                  
+      7369 SMITH      CLERK     CHICAGO                                                                                                                                                                 
+      7499 ALLEN      SALESMAN  CHICAGO                                                                                                                                                                 
+      7521 WARD       SALESMAN  CHICAGO                                                                                                                                                                 
+      7566 JONES      MANAGER   CHICAGO                                                                                                                                                                 
+      7654 MARTIN     SALESMAN  CHICAGO                                                                                                                                                                 
+      7698 BLAKE      MANAGER   CHICAGO                                                                                                                                                                 
+      7782 CLARK      MANAGER   CHICAGO                                                                                                                                                                 
+      7788 SCOTT      ANALYST   CHICAGO                                                                                                                                                                 
+      7839 KING       PRESIDENT CHICAGO                                                                                                                                                                 
+      7844 TURNER     SALESMAN  CHICAGO                                                                                                                                                                 
+      7876 ADAMS      CLERK     CHICAGO                                                                                                                                                                 
+      7900 JAMES      CLERK     CHICAGO                                                                                                                                                                 
+      7902 FORD       ANALYST   CHICAGO                                                                                                                                                                 
+      7934 MILLER     CLERK     CHICAGO                                                                                                                                                                 
+      7369 SMITH      CLERK     BOSTON                                                                                                                                                                  
+      7499 ALLEN      SALESMAN  BOSTON                                                                                                                                                                  
+      7521 WARD       SALESMAN  BOSTON                                                                                                                                                                  
+      7566 JONES      MANAGER   BOSTON                                                                                                                                                                  
+      7654 MARTIN     SALESMAN  BOSTON                                                                                                                                                                  
+      7698 BLAKE      MANAGER   BOSTON                                                                                                                                                                  
+      7782 CLARK      MANAGER   BOSTON                                                                                                                                                                  
+      7788 SCOTT      ANALYST   BOSTON                                                                                                                                                                  
+      7839 KING       PRESIDENT BOSTON                                                                                                                                                                  
+      7844 TURNER     SALESMAN  BOSTON                                                                                                                                                                  
+      7876 ADAMS      CLERK     BOSTON                                                                                                                                                                  
+      7900 JAMES      CLERK     BOSTON                                                                                                                                                                  
+      7902 FORD       ANALYST   BOSTON                                                                                                                                                                  
+      7934 MILLER     CLERK     BOSTON                                                                                                                                                                  
+
+56 rows selected.
+
+SQL> 
+SQL> 
+SQL> --Q3) WAQTD EMPNO,SAL,LOC IF THEY ARE WORKING AS SALESMAN
+SQL> 
+SQL> SELECT EMPNO,SAL,LOC
+  2  FROM EMP INNER JOIN DEPT
+  3  WHERE JOB = 'SALESMAN';
+WHERE JOB = 'SALESMAN'
+*
+ERROR at line 3:
+ORA-00905: missing keyword 
+
+
+SQL> edit
+Wrote file afiedt.buf
+
+  1  SELECT EMPNO,SAL,LOC
+  2  FROM EMP INNER JOIN DEPT
+  3  ON EMP.DEPTNO = DEPT.DEPTNO
+  4* WHERE JOB = 'SALESMAN'
+SQL> /
+
+     EMPNO        SAL LOC                                                                                                                                                                               
+---------- ---------- -------------                                                                                                                                                                     
+      7499       1600 CHICAGO                                                                                                                                                                           
+      7521       1250 CHICAGO                                                                                                                                                                           
+      7654       1250 CHICAGO                                                                                                                                                                           
+      7844       1500 CHICAGO                                                                                                                                                                           
+
+SQL> 
+SQL> 
+SQL> Q4) WAQTD EMPNO,SAL,COMM,LOC IF EMPS ARE GETTING SAL MORETHAN 2000
+SP2-0734: unknown command beginning "Q4) WAQTD ..." - rest of line ignored.
+SQL> --Q4) WAQTD EMPNO,SAL,COMM,LOC IF EMPS ARE GETTING SAL MORETHAN 2000
+SQL> 
+SQL> SELECT EMPNO, SAL, COMM
+  2  FROM EMP INNER JOIN DEPT
+  3  ON EMP.DEPTNO = DEPT.DEPTNO
+  4  WHERE SAL > 2000;
+
+     EMPNO        SAL       COMM                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+      7566       2975                                                                                                                                                                                   
+      7698       2850                                                                                                                                                                                   
+      7782       2450                                                                                                                                                                                   
+      7788       3000                                                                                                                                                                                   
+      7839       5000                                                                                                                                                                                   
+      7902       3000                                                                                                                                                                                   
+
+6 rows selected.
+
+SQL> 
+SQL> 
+SQL> --Q5)  WAQTD NAME,JOB ALONG WITH LOC OF EMPS IF THEY ARE WORKING ASPRESIDENT IN ACCOUNTING DEPT --
+SQL> SELECT ENAME,JOB, LOC
+  2  FROM EMP INNER JOIN DEPT
+  3  ON EMP.DEPTNO = DEPT.DEPTNO
+  4  WHERE JOB = 'PRESIDENT' AND DNAME = 'ACCOUNTING';
+
+ENAME      JOB       LOC                                                                                                                                                                                
+---------- --------- -------------                                                                                                                                                                      
+KING       PRESIDENT NEW YORK                                                                                                                                                                           
+
+SQL> 
+SQL> 
+SQL> --Q6)WAQTD EMPNO,SAL,DNAME IF EMPS ARE GETTING COMM IN SALES DEPT
+SQL> 
+SQL> SELECT EMPNO, SAL, DNAME
+  2  FROM EMP INNER JOIN DEPT
+  3  ON EMP.DEPTNO = DEPT.DEPTNO
+  4  WHERE COMM IS NOT NULL AND DNAME ='SALES';
+
+     EMPNO        SAL DNAME                                                                                                                                                                             
+---------- ---------- --------------                                                                                                                                                                    
+      7499       1600 SALES                                                                                                                                                                             
+      7521       1250 SALES                                                                                                                                                                             
+      7654       1250 SALES                                                                                                                                                                             
+      7844       1500 SALES                                                                                                                                                                             
+
+SQL> 
+SQL> 
+SQL> --Q7)  WAQTD DETAILS OF EMPS ALONG WITH LOC IF EMPS ARE LOCATED IN CHICAGO
+SQL> 
+SQL> SELECT EMP.*, LOC
+  2  FROM EMP INNER JOIN DEPT
+  3  ON EMP.DEPTNO = DEPT.DEPTNO
+  4  WHERE LOC = 'CHICAGO';
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO LOC                                                                                                               
+---------- ---------- --------- ---------- --------- ---------- ---------- ---------- -------------                                                                                                     
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30 CHICAGO                                                                                                           
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30 CHICAGO                                                                                                           
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30 CHICAGO                                                                                                           
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30 CHICAGO                                                                                                           
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30 CHICAGO                                                                                                           
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30 CHICAGO                                                                                                           
+
+6 rows selected.
+
+SQL> 
+SQL> 
+SQL> --Q8) WAQTD DETAILS OF DEPT ALONG WITH ENAME IF EMPS ARE NOT WORKING AS CLERK
+SQL> 
+SQL> SELECT DEPT.*, ENAME
+  2  FROM EMP INNER JOIN DEPT
+  3  ON EMP.DEPTNO = DEPT.DEPTNO
+  4  WHERE JOB != 'CLERK';
+
+    DEPTNO DNAME          LOC           ENAME                                                                                                                                                           
+---------- -------------- ------------- ----------                                                                                                                                                      
+        30 SALES          CHICAGO       ALLEN                                                                                                                                                           
+        30 SALES          CHICAGO       WARD                                                                                                                                                            
+        20 RESEARCH       DALLAS        JONES                                                                                                                                                           
+        30 SALES          CHICAGO       MARTIN                                                                                                                                                          
+        30 SALES          CHICAGO       BLAKE                                                                                                                                                           
+        10 ACCOUNTING     NEW YORK      CLARK                                                                                                                                                           
+        20 RESEARCH       DALLAS        SCOTT                                                                                                                                                           
+        10 ACCOUNTING     NEW YORK      KING                                                                                                                                                            
+        30 SALES          CHICAGO       TURNER                                                                                                                                                          
+        20 RESEARCH       DALLAS        FORD                                                                                                                                                            
+
+10 rows selected.
+
+SQL> 
+SQL> 
+SQL> --Q9) WAQTD DETAILS OF EMPS AND DEPT IF EMPS ARE WORKING AS SALESMAN OR MANAGER IN SALES OR RES--EARCH DEPT
+SQL> 
+SQL> SELECT EMP.*,DEPT.*
+  2  FROM EMP INNE JOIN DEPT
+  3  ON EMP.DEPT = DEPT.DEPTNO
+  4  WHERE JOB IN ('SALESMAN','MANAGER') AND DNAME IN ('SALES','RESEARCH');
+ON EMP.DEPT = DEPT.DEPTNO
+   *
+ERROR at line 3:
+ORA-00904: "EMP"."DEPT": invalid identifier 
+
+
+SQL> edit
+Wrote file afiedt.buf
+
+  1  SELECT EMP.*,DEPT.*
+  2  FROM EMP INNER JOIN DEPT
+  3  ON EMP.DEPTNO = DEPT.DEPTNO
+  4* WHERE JOB IN ('SALESMAN','MANAGER') AND DNAME IN ('SALES','RESEARCH')
+SQL> /
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO     DEPTNO DNAME          LOC                                                                                     
+---------- ---------- --------- ---------- --------- ---------- ---------- ---------- ---------- -------------- -------------                                                                           
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30         30 SALES          CHICAGO                                                                                 
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30         30 SALES          CHICAGO                                                                                 
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20         20 RESEARCH       DALLAS                                                                                  
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30         30 SALES          CHICAGO                                                                                 
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30         30 SALES          CHICAGO                                                                                 
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30         30 SALES          CHICAGO                                                                                 
+
+6 rows selected.
+
+SQL> 
+SQL> 
+SQL> --Q10)  WAQTD ENAME,SAL,DEPTNO,LOC IF EMPS ARE WORKING AS ANALYST IN DALLAS OR BOSTON
+SQL> 
+SQL> SELECT ENAME, SAL, EMP.DEPTNO,LOC
+  2  FROM EMP INNER JOIN DEPT
+  3  ON EMP.DEPTNO = DEPT.DEPTNO
+  4  WHERE JOB = 'ANALYST' AND DNAME IN ('DALLAS','BOSTON');
+
+no rows selected
+
+SQL> 
+SQL> 
+SQL> --Q11) WAQTD NAME,COMM,HIREDATE,DNAME,LOC IF EMPS ARE WORKING IN DEPT 30 OR
+SQL> 
+SQL> SELECT ENAME, COMM, HIREDATE, DNAME, LOC
+  2  FROM EMP INNER JOIN DEPT
+  3  ON EMP.DEPTNO = DEPT.DEPTNO
+  4  WHERE EMP.DEPTNO IN ( 10,20) AND JOB IN ('SALESMAN','CLERK','MANAGER');
+
+ENAME            COMM HIREDATE  DNAME          LOC                                                                                                                                                      
+---------- ---------- --------- -------------- -------------                                                                                                                                            
+SMITH                 17-DEC-80 RESEARCH       DALLAS                                                                                                                                                   
+JONES                 02-APR-81 RESEARCH       DALLAS                                                                                                                                                   
+CLARK                 09-JUN-81 ACCOUNTING     NEW YORK                                                                                                                                                 
+ADAMS                 23-MAY-87 RESEARCH       DALLAS                                                                                                                                                   
+MILLER                23-JAN-82 ACCOUNTING     NEW YORK                                                                                                                                                 
+
+SQL> 
+SQL> 
+SQL> --Q12) WAQTD TOTAL SAL NEEDED TO PAY FOR ALL EMPS IN EACH DEPT BY USING JOINS
+SQL> 
+SQL> SELECT SUM(SAL)
+  2  FROM EMP INNER JOIN DEPT
+  3  ON EMP.DEPTNO = DEPT.DEPTNO
+  4  GROUP BY EMP.DEPTNO;
+
+  SUM(SAL)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      9400                                                                                                                                                                                              
+     10875                                                                                                                                                                                              
+      8750                                                                                                                                                                                              
+
+SQL> SELECT DEPT.DNAME, EMP.DEPTNO, SUM(SAL)
+  2  FROM EMP INNER JOIN DEPT
+  3  ON EMP.DEPTNO = DEPT.DEPTNO
+  4  GROUP BY EMP.DEPTNO,DNAME;
+
+DNAME              DEPTNO   SUM(SAL)                                                                                                                                                                    
+-------------- ---------- ----------                                                                                                                                                                    
+ACCOUNTING             10       8750                                                                                                                                                                    
+RESEARCH               20      10875                                                                                                                                                                    
+SALES                  30       9400                                                                                                                                                                    
+
+SQL> 
+SQL> 
+SQL> --Q13) WAQTD MAX OF SAL PRESENT IN EACH DEPT EXCEPT PRESIDENT IN WHICH THERE ARE 3 EMPS WORKING--
+SQL> 
+SQL> SELECT MAX(SAL), EMP.DEPTNO,DNAME
+  2  FROM EMP INNER JOIN DEPT DEPT
+  3  ON EMP.DEPT = DEPT.DEPTNO
+  4  WHERE EMP.DEPTNO NOT IN ( SELECT DEPTNO
+  5                            FROM EMP
+  6                            WHERE JOB = 'PRESIDENT')
+  7  GROUP BY EMP.DEPTNO,DNAME
+  8  HAVING COUNT(*) = 3;
+ON EMP.DEPT = DEPT.DEPTNO
+   *
+ERROR at line 3:
+ORA-00904: "EMP"."DEPT": invalid identifier 
+
+
+SQL> edit
+Wrote file afiedt.buf
+
+  1  SELECT MAX(SAL), EMP.DEPTNO,DNAME
+  2  FROM EMP INNER JOIN DEPT 
+  3  ON EMP.DEPTNO = DEPT.DEPTNO
+  4  WHERE EMP.DEPTNO NOT IN ( SELECT DEPTNO
+  5                            FROM EMP
+  6                            WHERE JOB = 'PRESIDENT')
+  7  GROUP BY EMP.DEPTNO,DNAME
+  8* HAVING COUNT(*) = 3
+SQL> /
+
+no rows selected
+
+SQL> 
+SQL> 
+SQL> SELECT MAX(SAL),EMP.DEPTNO,DNAME
+  2  FROM EMP INNER JOIN DEPT
+  3  ON EMP.DEPTNO = DEPT.DEPTNO
+  4  WHERE EMP.DEPTNO NOT IN ( SELECT DEPTNO
+  5                            FROM EMP
+  6                            WHERE JOB = 'PRESIDENT' AND DEPT.DEPTNO IN ( SELECT DEPTNO
+  7                                                                         FROM EMP
+  8                                                                         GROUP BY DEPTNO
+  9                                                                         HAVING COUNT(*)
+ 10                                                                         ))
+ 11  GROUP BY EMP,DEPTNO,DNAME;
+                                                                       ))
+                                                                       *
+ERROR at line 10:
+ORA-00920: invalid relational operator 
+
+
+SQL> edit
+Wrote file afiedt.buf
+
+  1  SELECT MAX(SAL),EMP.DEPTNO,DNAME
+  2  FROM EMP INNER JOIN DEPT
+  3  ON EMP.DEPTNO = DEPT.DEPTNO
+  4  WHERE EMP.DEPTNO NOT IN ( SELECT DEPTNO
+  5                            FROM EMP
+  6                            WHERE JOB = 'PRESIDENT' AND DEPT.DEPTNO IN ( SELECT DEPTNO
+  7                                                                         FROM EMP
+  8                                                                         GROUP BY DEPTNO
+  9                                                                         HAVING COUNT(*) = 3
+ 10                                                                         ))
+ 11* GROUP BY EMP.DEPTNO,DNAME
+SQL> /
+
+  MAX(SAL)     DEPTNO DNAME                                                                                                                                                                             
+---------- ---------- --------------                                                                                                                                                                    
+      3000         20 RESEARCH                                                                                                                                                                          
+      2850         30 SALES                                                                                                                                                                             
+
+SQL> 
+SQL> 
+SQL> 
+SQL> --Q14) WAQTD TOTAL SAL ALONG WITH DNAME IN EACH DEPT IN WHICH THERE ARE ATLEAST 2 BUT ATMOST 6 -- EMPS ARE WORKING
+SQL> 
+SQL> 
+SQL> SELECT SUM(SAL),DNAME,DEPT.DEPTNO
+  2  FROM EMP INNER JOIN DEPT
+  3  ON EMP.DEPTNO = DEPT.DEPTNO
+  4  GROUP BY DNAME, DEPT.DEPTNO
+  5  HAVING COUNT(*) BETWEEN 2 AND 6;
+
+  SUM(SAL) DNAME              DEPTNO                                                                                                                                                                    
+---------- -------------- ----------                                                                                                                                                                    
+     10875 RESEARCH               20                                                                                                                                                                    
+      9400 SALES                  30                                                                                                                                                                    
+      8750 ACCOUNTING             10                                                                                                                                                                    
+
+SQL> 
+SQL> 
+SQL> --Q15) WAQTD DETAILS OF EMPS ALONG WITH DNAME IF EMPS ARE GETTING 1ST MAX SAL
+SQL> 
+SQL> SELECT EMP.*, DNAME
+  2  FROM EMP INNER JOIN DEPT
+  3  GROUP BY SAL
+  4  HAVING MAX(SAL);
+GROUP BY SAL
+*
+ERROR at line 3:
+ORA-00905: missing keyword 
+
+
+SQL> 
+SQL> 
+SQL> SELECT EMP.*, DNAME
+  2  FROM EMP INNER JOIN DEPT
+  3  ON EMP.DEPTNO = DEPT.DEPTNO
+  4  WHERE SAL = ( SELECT MAX(SAL) FROM EMP);
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO DNAME                                                                                                             
+---------- ---------- --------- ---------- --------- ---------- ---------- ---------- --------------                                                                                                    
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10 ACCOUNTING                                                                                                        
+
+SQL> 
+SQL> 
+SQL> -- THIS IS THE ALL 15 QUESTIONS ANSER ACCORDING TO ME THANKS FOR THIS ASSIGNMENT------------
