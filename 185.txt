@@ -514,3 +514,865 @@ SQL> select *
 
 SQL> 
 SQL> 
+
+
+// this part is show how how i solve the joins question with logic and some other online material 
+
+SQL> SELECT NAME, COUNT(ID)
+  2  FROM EMPLOYEES INNER JOIN DEPARTMENTS
+  3  ON EMPLOYEES.DEPT_ID = DEPARTMENTS.DEPT_ID
+  4  GROUP BY NAME;
+
+NAME                                                COUNT(ID)
+-------------------------------------------------- ----------
+Alice                                                       1
+Bob                                                         1
+Diana                                                       1
+
+SQL> SELECT NAME, DEPT_NAME, (SELECT COUNT(*) FROM EMPLOYESS E2 WHERE E2.DEPT_ID = E.DEPT_ID) AS EMP
+LOYESS_IN_DEPT FROM EMPLOYEES E JOIN DEPARTMENTS D 
+  2  ON D.DEPT_ID = E.DEPT_ID
+  3  GROUP BY NAME,DEPT_NAME;
+SELECT NAME, DEPT_NAME, (SELECT COUNT(*) FROM EMPLOYESS E2 WHERE E2.DEPT_ID = E.DEPT_ID) AS EMPLOYES
+                                              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> 
+Wrote file afiedt.buf
+
+  1  SELECT NAME, DEPT_NAME, (SELECT COUNT(*) FROM EMPLOYEES E2 WHERE E2.DEPT_ID = E.DEPT_ID) AS EMP
+  2  ON D.DEPT_ID = E.DEPT_ID
+  3* GROUP BY NAME,DEPT_NAME
+SQL> /
+SELECT NAME, DEPT_NAME, (SELECT COUNT(*) FROM EMPLOYEES E2 WHERE E2.DEPT_ID = E.DEPT_ID) AS EMPLOYES
+                                                                              *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression
+
+
+SQL> SELECT NAME, DEPT_NAME , (
+  2                            SELECT COUNT(*)
+  3                            FROM EMPLOYEES E2 
+  4                            WHERE E2.DEPT_ID = E.DEPT_ID)
+  5                            AS EMPLOYESS_COUNT
+  6  FROM EMPLOYEES E JOIN DEPARTMENTS D
+  7  ON D.DEPT_ID = E.DEPT_ID
+  8  GROUP BY NAME, DNAME;
+GROUP BY NAME, DNAME
+               *
+ERROR at line 8:
+ORA-00904: "DNAME": invalid identifier
+
+
+SQL> 
+Wrote file afiedt.buf
+
+  1  SELECT NAME, DEPT_NAME , (
+  2                            SELECT COUNT(*)
+  3                            FROM EMPLOYEES E2
+  4                            WHERE E2.DEPT_ID = E.DEPT_ID)
+  5                            AS EMPLOYESS_COUNT
+  6  FROM EMPLOYEES E JOIN DEPARTMENTS D
+  7  ON D.DEPT_ID = E.DEPT_ID
+  8* GROUP BY NAME, DEPT_NAME
+SQL> /
+                          WHERE E2.DEPT_ID = E.DEPT_ID)
+                                             *
+ERROR at line 4:
+ORA-00979: not a GROUP BY expression
+
+
+SQL> SELECT 
+  2      e.name AS employee_name,
+  3      d.dept_name AS department_name,
+  4      (SELECT COUNT(*) FROM employees e2 WHERE e2.dept_id = e.dept_id) AS employees_in_department
+
+  5  FROM 
+  6      employees e
+  7  JOIN 
+  8      departments d ON e.dept_id = d.dept_id
+  9  ORDER BY 
+ 10      d.dept_name, e.name;
+
+EMPLOYEE_NAME
+--------------------------------------------------
+DEPARTMENT_NAME                                    EMPLOYEES_IN_DEPARTMENT
+-------------------------------------------------- -----------------------
+Diana
+Finance                                                                  1
+
+Alice
+HR                                                                       1
+
+Bob
+IT                                                                       1
+
+
+SQL> SELECT NAME , DEPT_NAME ,COUNT(*)
+  2  FROM EMPLOYEES INNER JOIN DEPARTMENTS
+  3  ON EMPOYEES.DEPT_ID = DEPARTMENT.DEPT_ID
+  4  GROUP BY NAME, DEPT_NAME;
+ON EMPOYEES.DEPT_ID = DEPARTMENT.DEPT_ID
+                      *
+ERROR at line 3:
+ORA-00904: "DEPARTMENT"."DEPT_ID": invalid identifier
+
+
+SQL> 
+Wrote file afiedt.buf
+
+  1  SELECT NAME , DEPT_NAME ,COUNT(*)
+  2  FROM EMPLOYEES INNER JOIN DEPARTMENTS
+  3  ON EMPOYEES.DEPT_ID = DEPARTMENTS.DEPT_ID
+  4* GROUP BY NAME, DEPT_NAME
+SQL> /
+ON EMPOYEES.DEPT_ID = DEPARTMENTS.DEPT_ID
+   *
+ERROR at line 3:
+ORA-00904: "EMPOYEES"."DEPT_ID": invalid identifier
+
+
+SQL> 
+Wrote file afiedt.buf
+
+  1  SELECT NAME , DEPT_NAME ,COUNT(*)
+  2  FROM EMPLOYEES INNER JOIN DEPARTMENTS
+  3  ON EMPLOYEES.DEPT_ID = DEPARTMENTS.DEPT_ID
+  4* GROUP BY NAME, DEPT_NAME
+SQL> /
+
+NAME
+--------------------------------------------------
+DEPT_NAME                                            COUNT(*)
+-------------------------------------------------- ----------
+Alice
+HR                                                          1
+
+Bob
+IT                                                          1
+
+Diana
+Finance                                                     1
+
+
+SQL> SET PAGES 100 LINES 100
+SQL> 
+SQL> 
+SQL> SELECT ENAME,DNAME COUNT(*)
+  2  FROM EMP INNER JOIN DEPT
+  3  ON DEPT.DEPTNO = EMP.DEPTNO 
+  4  GROUP BY ENAME,DNAME;
+SELECT ENAME,DNAME COUNT(*)
+                        *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> 
+Wrote file afiedt.buf
+
+  1  SELECT ENAME,DNAME ,COUNT(*)
+  2  FROM EMP INNER JOIN DEPT
+  3  ON DEPT.DEPTNO = EMP.DEPTNO
+  4* GROUP BY ENAME,DNAME
+SQL> /
+
+ENAME      DNAME            COUNT(*)
+---------- -------------- ----------
+TURNER     SALES                   1
+ADAMS      RESEARCH                1
+MARTIN     SALES                   1
+JAMES      SALES                   1
+MILLER     ACCOUNTING              1
+KING       ACCOUNTING              1
+SMITH      RESEARCH                1
+WARD       SALES                   1
+CLARK      ACCOUNTING              1
+ALLEN      SALES                   1
+JONES      RESEARCH                1
+SCOTT      RESEARCH                1
+BLAKE      SALES                   1
+FORD       RESEARCH                1
+
+14 rows selected.
+
+SQL> 
+Wrote file afiedt.buf
+
+  1  SELECT ENAME,DNAME ,COUNT(*)
+  2  FROM EMP  JOIN DEPT
+  3  ON DEPT.DEPTNO = EMP.DEPTNO
+  4* GROUP BY ENAME,DNAME
+SQL> /
+
+ENAME      DNAME            COUNT(*)
+---------- -------------- ----------
+TURNER     SALES                   1
+ADAMS      RESEARCH                1
+MARTIN     SALES                   1
+JAMES      SALES                   1
+MILLER     ACCOUNTING              1
+KING       ACCOUNTING              1
+SMITH      RESEARCH                1
+WARD       SALES                   1
+CLARK      ACCOUNTING              1
+ALLEN      SALES                   1
+JONES      RESEARCH                1
+SCOTT      RESEARCH                1
+BLAKE      SALES                   1
+FORD       RESEARCH                1
+
+14 rows selected.
+
+SQL> 
+Wrote file afiedt.buf
+
+  1  SELECT ENAME,DNAME ,COUNT(*)
+  2  FROM EMP  LEFT OUTER JOIN DEPT
+  3  ON DEPT.DEPTNO = EMP.DEPTNO
+  4* GROUP BY ENAME,DNAME
+SQL> /
+
+ENAME      DNAME            COUNT(*)
+---------- -------------- ----------
+TURNER     SALES                   1
+ADAMS      RESEARCH                1
+MARTIN     SALES                   1
+JAMES      SALES                   1
+MILLER     ACCOUNTING              1
+KING       ACCOUNTING              1
+SMITH      RESEARCH                1
+WARD       SALES                   1
+CLARK      ACCOUNTING              1
+ALLEN      SALES                   1
+JONES      RESEARCH                1
+SCOTT      RESEARCH                1
+BLAKE      SALES                   1
+FORD       RESEARCH                1
+
+14 rows selected.
+
+SQL> SELECT ENAME ,DNAME 
+  2  ( SELECT COUNT(*) FROM EMP WHERE EMP.DEPTNO = EMP.DEPTNO)
+  3  FROM EMP JOIN DEPT
+  4  ON DEPT.DEPTNO = EMP.DEPTNO
+  5  GROUP BY ENAME, DNAME;
+( SELECT COUNT(*) FROM EMP WHERE EMP.DEPTNO = EMP.DEPTNO)
+  *
+ERROR at line 2:
+ORA-00936: missing expression
+
+
+SQL> 
+Wrote file afiedt.buf
+
+  1  SELECT ENAME ,DNAME ,
+  2  ( SELECT COUNT(*) FROM EMP WHERE EMP.DEPTNO = EMP.DEPTNO)
+  3  FROM EMP JOIN DEPT
+  4  ON DEPT.DEPTNO = EMP.DEPTNO
+  5* GROUP BY ENAME, DNAME
+SQL> /
+
+ENAME      DNAME          (SELECTCOUNT(*)FROMEMPWHEREEMP.DEPTNO=EMP.DEPTNO)
+---------- -------------- -------------------------------------------------
+TURNER     SALES                                                         14
+ADAMS      RESEARCH                                                      14
+MARTIN     SALES                                                         14
+JAMES      SALES                                                         14
+MILLER     ACCOUNTING                                                    14
+KING       ACCOUNTING                                                    14
+SMITH      RESEARCH                                                      14
+WARD       SALES                                                         14
+CLARK      ACCOUNTING                                                    14
+ALLEN      SALES                                                         14
+JONES      RESEARCH                                                      14
+SCOTT      RESEARCH                                                      14
+BLAKE      SALES                                                         14
+FORD       RESEARCH                                                      14
+
+14 rows selected.
+
+SQL> SELECT ENAME, DNAME, 
+  2  (SELECT COUNT(*) FROM EMP E2 WHERE E2.DEPTNO = E.DEPTNO) AS EMPLOYE_COUNT
+  3  FROM EMP E
+  4  JOIN DEPT D
+  5  ON D.DEPTNO = E.DEPTNO
+  6  GROUP BY ENAME, DNAME;
+(SELECT COUNT(*) FROM EMP E2 WHERE E2.DEPTNO = E.DEPTNO) AS EMPLOYE_COUNT
+                                               *
+ERROR at line 2:
+ORA-00979: not a GROUP BY expression
+
+
+SQL> 
+Wrote file afiedt.buf
+
+  1  SELECT E.ENAME, D.DNAME,
+  2  (SELECT COUNT(*) FROM EMP E2 WHERE E2.DEPTNO = E.DEPTNO) AS EMPLOYE_COUNT
+  3  FROM EMP E
+  4  JOIN DEPT D
+  5  ON D.DEPTNO = E.DEPTNO
+  6* GROUP BY ENAME, DNAME
+SQL> /
+(SELECT COUNT(*) FROM EMP E2 WHERE E2.DEPTNO = E.DEPTNO) AS EMPLOYE_COUNT
+                                               *
+ERROR at line 2:
+ORA-00979: not a GROUP BY expression
+
+
+SQL> 
+Wrote file afiedt.buf
+
+  1  SELECT E.ENAME, D.DNAME,
+  2  (SELECT COUNT(*) FROM EMP E2 WHERE E2.DEPTNO = E2.DEPTNO) AS EMPLOYE_COUNT
+  3  FROM EMP E
+  4  JOIN DEPT D
+  5  ON D.DEPTNO = E.DEPTNO
+  6* GROUP BY ENAME, DNAME
+SQL> /
+
+ENAME      DNAME          EMPLOYE_COUNT
+---------- -------------- -------------
+TURNER     SALES                     14
+ADAMS      RESEARCH                  14
+MARTIN     SALES                     14
+JAMES      SALES                     14
+MILLER     ACCOUNTING                14
+KING       ACCOUNTING                14
+SMITH      RESEARCH                  14
+WARD       SALES                     14
+CLARK      ACCOUNTING                14
+ALLEN      SALES                     14
+JONES      RESEARCH                  14
+SCOTT      RESEARCH                  14
+BLAKE      SALES                     14
+FORD       RESEARCH                  14
+
+14 rows selected.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT E.ENAME, D.DNAME, ( SELECT COUNT(*) FROM EMP E2 WHERE E2.DEPTNO = E.DEPTNO ) AS EMPLOYEE
+_COUNT
+  2  FROM EMP E INNER JOIN DEPT D
+  3  ON E.DEPTNO = D.DEPTNO
+  4  GROUP BY E.ENAME,D.DNAME;
+SELECT E.ENAME, D.DNAME, ( SELECT COUNT(*) FROM EMP E2 WHERE E2.DEPTNO = E.DEPTNO ) AS EMPLOYEE_COUN
+                                                                         *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression
+
+
+SQL> SELECT E.ENAME, D.DNAME , 
+  2  ( SELECT COUNT(*) FROM EMP WHERE EMP.DEPTNO = E.DEPTNO ) ASEMPLOYE_COUNT
+  3  FROM EMP E INNER JOIN DEPT D
+  4  ON E.DEPTNO =D.DEPTNO 
+  5  GROUP BY ENAME , DNAME ,E.DEPTNO;
+
+ENAME      DNAME          ASEMPLOYE_COUNT
+---------- -------------- ---------------
+MILLER     ACCOUNTING                   3
+KING       ACCOUNTING                   3
+ALLEN      SALES                        6
+FORD       RESEARCH                     5
+CLARK      ACCOUNTING                   3
+WARD       SALES                        6
+JONES      RESEARCH                     5
+MARTIN     SALES                        6
+TURNER     SALES                        6
+SMITH      RESEARCH                     5
+BLAKE      SALES                        6
+SCOTT      RESEARCH                     5
+ADAMS      RESEARCH                     5
+JAMES      SALES                        6
+
+14 rows selected.
+
+SQL> SELECT ENAME ,DNAME , COUNT(*)
+  2  FROM EMP INNER JOIN DEPT
+  3  ON EMP.DEPTNO = DEPT.DEPTNO
+  4  GROUP BY ENAME , DNAME
+  5  HAVING COUNT(*) < 1;
+
+no rows selected
+
+SQL> SELECT ENAME , DNAME, (
+  2  SELECT COUNT(*) FROM EMP WHERE EMP.DEPTNO = E.DEPTNO ) AS EMPLOYEE_COUNT
+  3  FROM EMP E INNER JOIN DEPT D
+  4  ON E.DEPTNO = D.DEPTNO 
+  5  GROUP BY DEPTNO;
+GROUP BY DEPTNO
+         *
+ERROR at line 5:
+ORA-00918: column ambiguously defined
+
+
+SQL> 
+Wrote file afiedt.buf
+
+  1  SELECT ENAME , DNAME, (
+  2  SELECT COUNT(*) FROM EMP WHERE EMP.DEPTNO = E.DEPTNO ) AS EMPLOYEE_COUNT
+  3  FROM EMP E INNER JOIN DEPT D
+  4  ON E.DEPTNO = D.DEPTNO
+  5* GROUP BY E.DEPTNO
+SQL> /
+SELECT ENAME , DNAME, (
+       *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression
+
+
+SQL> SELECT ENAME, DNAME 
+  2  FROM EMP INNER JOIN DEPT
+  3  ON EMP.DEPTNO = DEPT.DEPTNO 
+  4  GROUP BY ENAME,DNAME
+  5  HAVING COUNT(*) = ( SELECT COUNT(*)
+  6                      FROM EMP
+  7                      WHERE EMP.DEPTNO = EMP.DEPTNO);
+
+no rows selected
+
+SQL> 
+Wrote file afiedt.buf
+
+  1  SELECT ENAME, DNAME
+  2  FROM EMP INNER JOIN DEPT
+  3  ON EMP.DEPTNO = DEPT.DEPTNO
+  4  GROUP BY ENAME,DNAME
+  5  HAVING COUNT(*) = ( SELECT COUNT(*)
+  6                      FROM EMP E
+  7*                     WHERE EMP.DEPTNO = E.DEPTNO)
+SQL> /
+                    WHERE EMP.DEPTNO = E.DEPTNO)
+                          *
+ERROR at line 7:
+ORA-00979: not a GROUP BY expression
+
+
+SQL> 
+Wrote file afiedt.buf
+
+  1  SELECT ENAME, DNAME
+  2  FROM EMP INNER JOIN DEPT
+  3  ON EMP.DEPTNO = DEPT.DEPTNO
+  4  HAVING COUNT(*) = ( SELECT COUNT(*)
+  5                      FROM EMP E
+  6                      WHERE EMP.DEPTNO = E.DEPTNO)
+  7* GROUP BY ENAME,DNAME, E.DEPTNO
+  8  /
+GROUP BY ENAME,DNAME, E.DEPTNO
+                      *
+ERROR at line 7:
+ORA-00904: "E"."DEPTNO": invalid identifier
+
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT DNAME , ENAME 
+  2  FROM EMP INNER JOIN DEPT
+  3  ON EMP.DEPTNO = DEPT.DEPTNO
+  4  HAVING (*) > 2;
+HAVING (*) > 2
+        *
+ERROR at line 4:
+ORA-00936: missing expression
+
+
+SQL> SELECT DNAME , ENAME
+  2  FROM EMP INNER JOIN DEPT
+  3  ON EMP.DEPTNO  = DEPT.DEPTNO
+  4  HAVING COUNT(*) > 2;
+SELECT DNAME , ENAME
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function
+
+
+SQL> SELECT DNAME,ENAME
+  2  FROM EMP INNER JOIN DEPT
+  3  ON EMP.DEPTNO = DEPT.DEPTNO
+  4  GROUP BY DNAME,ENAME
+  5  HAVING COUNT(*) > 2;
+
+no rows selected
+
+SQL> SELECT DNAME, ENAME
+  2  FROM EMP INNER JOIN DEPT
+  3  ON EMP.DEPTNO = DEPT.DEPTNO
+  4  WHERE DEPTNO IN ( SELECT DEPTNO
+  5                    FROM EMP
+  6                    GROUP BY EMP.DEPTNO
+  7                    HAVING COUNT(*) > 2)
+  8  GROUP BY DNAME,ENAME;
+WHERE DEPTNO IN ( SELECT DEPTNO
+      *
+ERROR at line 4:
+ORA-00918: column ambiguously defined
+
+
+SQL> 
+Wrote file afiedt.buf
+
+  1  SELECT DNAME, ENAME
+  2  FROM EMP INNER JOIN DEPT
+  3  ON EMP.DEPTNO = DEPT.DEPTNO
+  4  WHERE DEPT.DEPTNO IN ( SELECT DEPTNO
+  5                    FROM EMP
+  6                    GROUP BY EMP.DEPTNO
+  7                    HAVING COUNT(*) > 2)
+  8* GROUP BY DNAME,ENAME
+SQL> /
+
+DNAME          ENAME
+-------------- ----------
+RESEARCH       JONES
+ACCOUNTING     KING
+SALES          JAMES
+SALES          BLAKE
+RESEARCH       FORD
+RESEARCH       SMITH
+RESEARCH       SCOTT
+SALES          TURNER
+SALES          ALLEN
+SALES          MARTIN
+ACCOUNTING     CLARK
+RESEARCH       ADAMS
+SALES          WARD
+ACCOUNTING     MILLER
+
+14 rows selected.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT CNAME, PNAME
+  2  FROM CUST LEFT OUTER JOIN ORDERS
+  3  ON CUST.CUSTID = ORDERS.DEPTNO;
+ON CUST.CUSTID = ORDERS.DEPTNO
+                 *
+ERROR at line 3:
+ORA-00904: "ORDERS"."DEPTNO": invalid identifier
+
+
+SQL> SELECT CNAME, PNAME
+  2  FROM CUST LEFT OUTER JOIN ORDERS 
+  3  ON CUST.CUSTID =
+  4  
+SQL> 
+SQL> SELECT * FROM ORDERS ;
+
+   ORDERID CUSTID     PRODID     ORDERDATE STATUS
+---------- ---------- ---------- --------- --------------------
+         1 c1         p1         28-FEB-25 done
+         2 c2         p2         15-MAR-25 pending
+         3 c1         p2         10-JAN-25 pending
+         4 c3         p2         05-APR-25 pending
+         5 c5         p1         20-MAY-25 pending
+
+SQL> 
+SQL> 
+SQL> SELECT CNAME,PNAME
+  2  FROM CUST LEFT OUTER JOIN PROD
+  3  
+SQL> 
+SQL> SELECT CUST LEFT OUTER JOIN ORDERS
+  2  
+SQL> 
+SQL> SELECT CNAME, PNAME
+  2  FROM CUST C LEFT OUTER JOIN ORDERS O
+  3  ON C.CUSTID = O.CUSTID LEFT OUTER JOIN PROD
+  4  ON PROD.PRODID = O.PRODID;
+
+CNAME
+--------------------------------------------------
+PNAME
+--------------------------------------------------
+sudri
+shoes
+
+sundram
+shoes
+
+macha
+mobile
+
+sundram
+mobile
+
+machi
+mobile
+
+sudra
+
+
+
+6 rows selected.
+
+SQL> SET PAGES 100 LINES 200
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT C.*, p.*
+  2  FROM CUST C RIGHT OUTER JOIN ORDER O
+  3  ON C.CUSTID = O.CUSTID LEFT OUTER JOIN PROD P 
+  4  ON O.CUSTID = P.CUSTID;
+FROM CUST C RIGHT OUTER JOIN ORDER O
+                             *
+ERROR at line 2:
+ORA-00903: invalid table name
+
+
+SQL> 
+Wrote file afiedt.buf
+
+  1  SELECT C.*, p.*
+  2  FROM CUST C RIGHT OUTER JOIN ORDERS O
+  3  ON C.CUSTID = O.CUSTID LEFT OUTER JOIN PROD P
+  4* ON O.CUSTID = P.CUSTID
+SQL> /
+ON O.CUSTID = P.CUSTID
+              *
+ERROR at line 4:
+ORA-00904: "P"."CUSTID": invalid identifier
+
+
+SQL> 
+Wrote file afiedt.buf
+
+  1  SELECT C.*, p.*
+  2  FROM CUST C RIGHT OUTER JOIN ORDERS O
+  3  ON C.CUSTID = O.CUSTID LEFT OUTER JOIN PROD
+  4* ON O.CUSTID = PROD.CUSTID
+SQL> /
+ON O.CUSTID = PROD.CUSTID
+              *
+ERROR at line 4:
+ORA-00904: "PROD"."CUSTID": invalid identifier
+
+
+SQL> SELECT C.*, P.*
+  2  FROM PROD P LEFT OUTER JOIN ORDERS O
+  3  ON P.PRODID = O.PRODID LEFT OUTER JOIN CUST C
+  4  ON C.CUSTID = O.CUSTID;
+
+CUSTID     CNAME                                              CCONTACT        CADD                                                                              
+---------- -------------------------------------------------- --------------- ----------------------
+PNAME                                                  PPRICE        PQT
+-------------------------------------------------- ---------- ----------
+c1         sundram                                            9876543210      pune                                                                              
+mobile                                                  15000         50
+
+c1         sundram                                            9876543210      pune                                                                              
+shoes                                                    5000        100
+
+c2         machi                                              8765432109      banglore                                                                          
+mobile                                                  15000         50
+
+c3         macha                                              7654321098      wakad                                                                             
+mobile                                                  15000         50
+
+c5         sudri                                              5432109876      pune                                                                              
+shoes                                                    5000        100
+
+                                                                                                                                                                
+laptop                                                  45000         20
+
+
+6 rows selected.
+
+SQL> SELECT C.*, PNAME
+  2  FROM PROD P LEFT OUTER JOIN ORDERS O
+  3  ON P.PRODID = O.PRODID LEFT OUTER JOIN REVIEW R
+  4  
+SQL> 
+SQL> 
+SQL> SELECT C.*, PNAME
+  2  FROM CUST C INNER JOIN ORDERS O
+  3  ON C.CUSTID = O.CUSTID LEFT OUTER JOIN REVIEW R 
+  4  ON R.CUSTID = O.CUSTID;
+SELECT C.*, PNAME
+            *
+ERROR at line 1:
+ORA-00904: "PNAME": invalid identifier
+
+
+SQL> 
+SQL> 
+SQL> SELECT *
+  2  FROM CUST LEFT OUTER JOIN ORDER
+  3  ON CUST.CUSTID  = ORDER.CUSTID LEFT OUTER JOIN REVIEW
+  4  ON REVIEW.CUSTID = ORDER.CUSTID;
+FROM CUST LEFT OUTER JOIN ORDER
+                          *
+ERROR at line 2:
+ORA-00903: invalid table name
+
+
+SQL> 
+Wrote file afiedt.buf
+
+  1  SELECT *
+  2  FROM CUST LEFT OUTER JOIN ORDER
+  3  ON CUST.CUSTID  = ORDERS.CUSTID LEFT OUTER JOIN REVIEW
+  4* ON REVIEW.CUSTID = ORDERS.CUSTID
+SQL> /
+FROM CUST LEFT OUTER JOIN ORDER
+                          *
+ERROR at line 2:
+ORA-00903: invalid table name
+
+
+SQL> 
+Wrote file afiedt.buf
+
+  1  SELECT *
+  2  FROM CUST LEFT OUTER JOIN ORDERS
+  3  ON CUST.CUSTID  = ORDERS.CUSTID LEFT OUTER JOIN REVIEW
+  4* ON REVIEW.CUSTID = ORDERS.CUSTID
+SQL> /
+
+CUSTID     CNAME                                              CCONTACT        CADD                                                                              
+---------- -------------------------------------------------- --------------- ----------------------
+PRODID     ORDERDATE STATUS                 REVIEWID CUSTID     REVIEWRATING REVIEWDESC
+---------- --------- -------------------- ---------- ---------- ------------ -----------------------
+c1         sundram                                            9876543210      pune                                                                              
+p2         10-JAN-25 pending                       1 c1                    3 bad
+
+c1         sundram                                            9876543210      pune                                                                              
+p1         28-FEB-25 done                          1 c1                    3 bad
+
+c2         machi                                              8765432109      banglore                                                                          
+p2         15-MAR-25 pending                       2 c2                  4.5 avg
+
+c3         macha                                              7654321098      wakad                                                                             
+p2         05-APR-25 pending                       3 c3                    5 good
+
+c4         sudra                                              6543210987      pune
+
+
+c5         sudri                                              5432109876      pune                                                                              
+p1         20-MAY-25 pending
+
+
+6 rows selected.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT P.*
+  2  FROM PROD P LEFT OUTER JOIN ORDERS O
+  3  ON P.PRODID = O.PRODID LEFT OUTER JOIN REVIEW R'
+  4  ON P.PRODID = R.PRODID
+  5  WHERE O.PRODID IS NULL AND R.PRODID IS NULL;
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> 
+Wrote file afiedt.buf
+
+  1  SELECT P.*
+  2  FROM PROD P LEFT OUTER JOIN ORDERS O
+  3  ON P.PRODID = O.PRODID LEFT OUTER JOIN REVIEW R
+  4  ON O.PRODID = R.PRODID
+  5* WHERE O.PRODID IS NULL AND R.PRODID IS NULL
+SQL> /
+ON O.PRODID = R.PRODID
+              *
+ERROR at line 4:
+ORA-00904: "R"."PRODID": invalid identifier
+
+
+SQL> SELECT P.*
+  2  FROM CUST C INNER JOIN ORDERS O
+  3  ON C.CUSTID = O.CUSTID LEFT OUTER JOIN PROD P
+  4  ON P.RPODID = O.PRODID LEFT OUTER JOIN REVIEW R
+  5  ON O.CUSTID = R.CUSTID
+  6  
+SQL> 
+Wrote file afiedt.buf
+
+  1  SELECT P.*
+  2  FROM CUST C INNER JOIN ORDERS O
+  3  ON C.CUSTID = O.CUSTID LEFT OUTER JOIN PROD P
+  4  ON P.RPODID = O.PRODID LEFT OUTER JOIN REVIEW R
+  5  ON O.CUSTID = R.CUSTID
+  6* WHERE O.CUSTID IS NULL AND R.CUSTID IS NULL
+SQL> /
+ON P.RPODID = O.PRODID LEFT OUTER JOIN REVIEW R
+   *
+ERROR at line 4:
+ORA-00904: "P"."RPODID": invalid identifier
+
+
+SQL> 
+Wrote file afiedt.buf
+
+  1  SELECT P.*
+  2  FROM CUST C INNER JOIN ORDERS O
+  3  ON C.CUSTID = O.CUSTID LEFT OUTER JOIN PROD P
+  4  ON P.PRODID = O.PRODID LEFT OUTER JOIN REVIEW R
+  5  ON O.CUSTID = R.CUSTID
+  6* WHERE O.CUSTID IS NULL AND R.CUSTID IS NULL
+SQL> /
+
+no rows selected
+
+SQL> 
+SQL> 
+SQL> SELECT *
+  2  FROM PROD
+  3  WHERE PRODID NOT IN  ( SELECT PRODID FROM ORDERS WHERE PRODID IS NOT NULL) AND
+  4        
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT *
+  2  FROM CUST C FULL OUTER JOIN ORDERS O
+  3  ON C.CUSTID  = O.CUSTID;
+
+CUSTID     CNAME                                              CCONTACT        CADD                                                                              
+---------- -------------------------------------------------- --------------- ----------------------
+PRODID     ORDERDATE STATUS
+---------- --------- --------------------
+c1         sundram                                            9876543210      pune                                                                              
+p1         28-FEB-25 done
+
+c2         machi                                              8765432109      banglore                                                                          
+p2         15-MAR-25 pending
+
+c1         sundram                                            9876543210      pune                                                                              
+p2         10-JAN-25 pending
+
+c3         macha                                              7654321098      wakad                                                                             
+p2         05-APR-25 pending
+
+c5         sudri                                              5432109876      pune                                                                              
+p1         20-MAY-25 pending
+
+c4         sudra                                              6543210987      pune
+
+
+
+6 rows selected.
+
+SQL> 
