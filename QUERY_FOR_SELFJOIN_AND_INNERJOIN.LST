@@ -1,0 +1,193 @@
+--1) WRITE A QUERY TO DISPLAY THE EMPLOYEE NAME, MANAGER NAME, EMPLOYEE SALARY, MANAGER SALRY, EMPLOYEE JOB, MANAGER JOB IF THE EMPLOYEE ARE GETTING SALARY MORE THAN 2000 AND MANAGER ARE WORKING IN DEPTNO 10 OR 20 ?
+SQL> --ANS:
+SQL> SELECT E1.ENAME,M1.ENAME,E1.SAL,M1.SAL,E1.JOB,M1.JOB
+  2  FROM EMP E1 JOIN EMP M1
+  3  ON E1.MGR = M1.EMPNO
+  4  WHERE E1.SAL > 2000 AND
+  5        M1.JOB = 'MANAGER';
+
+ENAME      ENAME             SAL        SAL JOB       JOB                                           
+---------- ---------- ---------- ---------- --------- ---------                                     
+SCOTT      JONES            3000       2975 ANALYST   MANAGER                                       
+FORD       JONES            3000       2975 ANALYST   MANAGER                                       
+
+SQL> 
+SQL> 
+SQL> --Q2) WRITE A QUERY TO DISPLAY THE EMPLOYEE NAME, MANAGER NAME, EMPLOYEE SAL AND MANAGER SAL IF BOTH EMPLOYEE SAL AND MANAGER SAL SAME ?
+SQL> --ANS:
+SQL>  SELECT E.ENAME, M.ENAME, E.SAL, M.SAL
+  2  FROM EMP E JOIN EMP M
+  3  ON E.MGR = M.EMPNO
+  4  WHERE E.SAL = M.SAL;
+
+no rows selected
+
+SQL> 
+SQL> 
+SQL> --Q3) WRITE A QUERY TO DISPLAY THE HIGHEST EMPLOYEE SAL AND MANAGER SAL IN EACH EMPLOYEE AND MANAGER DEPTNO
+SQL> --ANS:
+SQL>  SELECT MAX(E.SAL) AS HIGHEST_SAL_OF_EMP, MAX(M.SAL) AS HIGHEST_SAL_OF_MANAGER ,
+  2  E.DEPTNO, M.DEPTNO
+  3  FROM EMP E JOIN EMP M
+  4  ON E.MGR = M.EMPNO
+  5  GROUP BY E.DEPTNO, M.DEPTNO;
+
+HIGHEST_SAL_OF_EMP HIGHEST_SAL_OF_MANAGER     DEPTNO     DEPTNO                                     
+------------------ ---------------------- ---------- ----------                                     
+              2450                   5000         10         10                                     
+              2850                   5000         30         10                                     
+              1600                   2850         30         30                                     
+              3000                   3000         20         20                                     
+              2975                   5000         20         10                                     
+
+SQL> 
+SQL> 
+SQL> --Q3 WRITE A QUERY TO DISPLAY THE EMPLOYEE NAME, MANAGER NAME, MANAGER LOCATION
+SQL> --ANS:
+SQL>  SELECT E.ENAME, M.ENAME, DM.LOC
+  2  FROM EMP E JOIN EMP M
+  3  ON E.MGR = M.EMPNO INNER JOIN DEPT
+  4  ON DM.DEPTNO = M.DEPTNO;
+ON DM.DEPTNO = M.DEPTNO
+   *
+ERROR at line 4:
+ORA-00904: "DM"."DEPTNO": invalid identifier 
+
+
+SQL> edit
+Wrote file afiedt.buf
+
+  1   SELECT E.ENAME, M.ENAME, DM.LOC
+  2  FROM EMP E JOIN EMP M
+  3  ON E.MGR = M.EMPNO INNER JOIN DEPT DM
+  4* ON DM.DEPTNO = M.DEPTNO
+SQL> /
+
+ENAME      ENAME      LOC                                                                           
+---------- ---------- -------------                                                                 
+SMITH      FORD       DALLAS                                                                        
+ALLEN      BLAKE      CHICAGO                                                                       
+WARD       BLAKE      CHICAGO                                                                       
+JONES      KING       NEW YORK                                                                      
+MARTIN     BLAKE      CHICAGO                                                                       
+BLAKE      KING       NEW YORK                                                                      
+CLARK      KING       NEW YORK                                                                      
+SCOTT      JONES      DALLAS                                                                        
+TURNER     BLAKE      CHICAGO                                                                       
+ADAMS      SCOTT      DALLAS                                                                        
+JAMES      BLAKE      CHICAGO                                                                       
+FORD       JONES      DALLAS                                                                        
+MILLER     CLARK      NEW YORK                                                                      
+
+13 rows selected.
+
+SQL> 
+SQL> --Q4) WRITE A QUERY TO DISPLAY THE EMPLOYEE NAME, MANAGER NAME, EMPLOYEE LOCATION AND MANAGER LOCATION IF THE MANAGER AND EMPLOYEE LOCATION ARE SAME?
+SQL> --ANS :
+SQL>  SELECT E.ENAME AS EMPLOYEE_NAME, M.ENAME AS MANAGER_NAME, E.LOC AS EMPLOYEE_LOC, M.LOC AS MANAGER_LOC
+  2  FROM EMP E JOIN EMP M
+  3  ON E.MGR = M.EMPNO INNER JOIN DEPT DE
+  4  ON DE.DEPTNO = E.DEPTNO INNER JOIN DEPT DM
+  5  ON DM.DEPTNO = M.DEPTNO
+  6  WHERE DE.LOC =DM.LOC;
+ SELECT E.ENAME AS EMPLOYEE_NAME, M.ENAME AS MANAGER_NAME, E.LOC AS EMPLOYEE_LOC, M.LOC AS MANAGER_LOC
+                                                                                  *
+ERROR at line 1:
+ORA-00904: "M"."LOC": invalid identifier 
+
+
+SQL> edit
+Wrote file afiedt.buf
+
+  1   SELECT E.ENAME AS EMPLOYEE_NAME, M.ENAME AS MANAGER_NAME, DE.LOC AS EMPLOYEE_LOC, DM.LOC AS MANAGER_LOC
+  2  FROM EMP E JOIN EMP M
+  3  ON E.MGR = M.EMPNO INNER JOIN DEPT DE
+  4  ON DE.DEPTNO = E.DEPTNO INNER JOIN DEPT DM
+  5  ON DM.DEPTNO = M.DEPTNO
+  6* WHERE DE.LOC =DM.LOC
+SQL> /
+
+EMPLOYEE_N MANAGER_NA EMPLOYEE_LOC  MANAGER_LOC                                                     
+---------- ---------- ------------- -------------                                                   
+SMITH      FORD       DALLAS        DALLAS                                                          
+ALLEN      BLAKE      CHICAGO       CHICAGO                                                         
+WARD       BLAKE      CHICAGO       CHICAGO                                                         
+MARTIN     BLAKE      CHICAGO       CHICAGO                                                         
+CLARK      KING       NEW YORK      NEW YORK                                                        
+SCOTT      JONES      DALLAS        DALLAS                                                          
+TURNER     BLAKE      CHICAGO       CHICAGO                                                         
+ADAMS      SCOTT      DALLAS        DALLAS                                                          
+JAMES      BLAKE      CHICAGO       CHICAGO                                                         
+FORD       JONES      DALLAS        DALLAS                                                          
+MILLER     CLARK      NEW YORK      NEW YORK                                                        
+
+11 rows selected.
+
+SQL> 
+SQL> 
+SQL> --Q5) WRITE A QUERY TO DISPLAY THE EMPLOYEE NAME, MANAGER NAME, EMPLOYEE DEPARTMENT NAME, MANAGER DEPARTMENT NAME IF THE EMPLOYEE DEPARTMENT NAME FIRST CHARACTER SHOULD BE SAME AS MANAGER DEPARTMNET NAME FIRST CHARACTER ?
+SQL> --ANS :
+SQL> SELECT E.ENAME AS EMPLOYE_NAME, M.ENAME AS MANAGER_NAME, DE.DNAME AS EMPLOYEE_DEPARTMENT_NAME, DM.DNAME AS MANAGER_DEPARTMENT_NAME
+  2  FROM EMP E JOIN EMP M
+  3  ON E.MGR = M.EMPNO INNER JOIN DEPT DE
+  4  ON DE.DEPTNO = E.DEPTNO INNER JOIN DEPT DE
+  5  ON DM.DEPTNO = M.DEPTNO
+  6  WHERE LEFT(DE.DNAME, 1) = LEFT(DM.DNAME,1);
+SELECT E.ENAME AS EMPLOYE_NAME, M.ENAME AS MANAGER_NAME, DE.DNAME AS EMPLOYEE_DEPARTMENT_NAME, DM.DNAME AS MANAGER_DEPARTMENT_NAME
+*
+ERROR at line 1:
+ORA-00918: column ambiguously defined 
+
+
+SQL> edit
+Wrote file afiedt.buf
+
+  1  SELECT E.ENAME AS EMPLOYE_NAME, M.ENAME AS MANAGER_NAME, DE.DNAME AS EMPLOYEE_DEPARTMENT_NAME, DM.DNAME AS MANAGER_DEPARTMENT_NAME
+  2  FROM EMP E JOIN EMP M
+  3  ON E.MGR = M.EMPNO INNER JOIN DEPT DE
+  4  ON DE.DEPTNO = E.DEPTNO INNER JOIN DEPT DM
+  5  ON DM.DEPTNO = M.DEPTNO
+  6* WHERE LEFT(DE.DNAME, 1) = LEFT(DM.DNAME,1)
+SQL> /
+WHERE LEFT(DE.DNAME, 1) = LEFT(DM.DNAME,1)
+                          *
+ERROR at line 6:
+ORA-00904: "LEFT": invalid identifier 
+
+
+SQL> SELECT E.ENAME AS EMPLOYE_NAME, M.ENAME AS MANAGER_NAME, DE.DNAME AS EMPLOYEE_DEPARTMENT_NAME,DDM.DNAME AS MANAGER_DEPARTMENT_NAME
+  2  FROM EMP E JOIN EMP M
+  3  ON E.MGR = M.EMPNO INNER JOIN DEPT DE
+  4  ON DE.DEPTNO = E.DEPTNO INNER JOIN DEPT DM
+  5  ON DM.DEPTNO = M.DEPTNO
+  6  WHERE SUBSTR (DE.DNAME, 1,1) = SUBSTR (DM.DNAME, 1,1);
+SELECT E.ENAME AS EMPLOYE_NAME, M.ENAME AS MANAGER_NAME, DE.DNAME AS EMPLOYEE_DEPARTMENT_NAME,DDM.DNAME AS MANAGER_DEPARTMENT_NAME
+                                                                                              *
+ERROR at line 1:
+ORA-00904: "DDM"."DNAME": invalid identifier 
+
+
+SQL>  SELECT E.ENAME AS EMPLOYE_NAME, M.ENAME AS MANAGER_NAME, DE.DNAME AS EMPLOYEE_DEPARTMENT_NAME,DM.DNAME AS MANAGER_DEPARTMENT_NAME
+  2  FROM EMP E JOIN EMP M
+  3  ON E.MGR = M.EMPNO INNER JOIN DEPT DE
+  4  ON DE.DEPTNO = E.DEPTNO INNER JOIN DEPT DM
+  5  ON DM.DEPTNO = M.DEPTNO
+  6  WHERE SUBSTR (DE.DNAME, 1,1) = SUBSTR (DM.DNAME, 1,1);
+
+EMPLOYE_NA MANAGER_NA EMPLOYEE_DEPAR MANAGER_DEPART                                                 
+---------- ---------- -------------- --------------                                                 
+SMITH      FORD       RESEARCH       RESEARCH                                                       
+ALLEN      BLAKE      SALES          SALES                                                          
+WARD       BLAKE      SALES          SALES                                                          
+MARTIN     BLAKE      SALES          SALES                                                          
+CLARK      KING       ACCOUNTING     ACCOUNTING                                                     
+SCOTT      JONES      RESEARCH       RESEARCH                                                       
+TURNER     BLAKE      SALES          SALES                                                          
+ADAMS      SCOTT      RESEARCH       RESEARCH                                                       
+JAMES      BLAKE      SALES          SALES                                                          
+FORD       JONES      RESEARCH       RESEARCH                                                       
+MILLER     CLARK      ACCOUNTING     ACCOUNTING                                                     
+
+11 rows selected.
+
+SQL> 
