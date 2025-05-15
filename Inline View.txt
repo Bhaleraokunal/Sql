@@ -1,5 +1,5 @@
-* An inline view is a subquery in the FROM clause that acts like a temporary table for the duration of the query. It allows you to simplify complex queries by breaking them into logical parts.
-* Window functions perform calculations across a set of table rows related to the current row, without collapsing them into a single output row (unlike GROUP BY).
+1)  An inline view is a subquery in the FROM clause that acts like a temporary table for the duration of the query. It allows you to simplify complex queries by breaking them into logical parts.
+2) Window functions perform calculations across a set of table rows related to the current row, without collapsing them into a single output row (unlike GROUP BY).
 SQL> --Q1) WAQTD TO 5 MINIMUM SALARY ?
 SQL> 
 SQL> SELECT *
