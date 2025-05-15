@@ -1,0 +1,115 @@
+SQL> --Q1) WAQTD TO 5 MINIMUM SALARY ?
+SQL> 
+SQL> SELECT *
+  2  FROM ( SELECT ROWNUM R1, SAL
+  3         FROM ( SELECT DISTINCT (SAL)
+  4                FROM EMP
+  5                ORDER BY SAL))
+  6  WHERE R1 < =5;
+
+        R1        SAL
+---------- ----------
+         1        800
+         2        950
+         3       1100
+         4       1250
+         5       1300
+
+SQL> 
+SQL> --Q2) WAQTD 5TH MAX AND 10TH MIN SALARY SIMULTANIOUSLY ?
+SQL> 
+SQL> --1) WAY 1;
+SQL> SELECT *
+  2  FROM (SELECT ROWNUM R1, SAL
+  3        FROM (SELECT DISTINCT (SAL)
+  4              FROM EMP
+  5              ORDER BY SAL DESC))
+  6  WHERE ROWNUM = 5
+  7  UNION
+  8  SELECT *
+  9  FROM (SELECT ROWNUM R1, SAL
+ 10        FROM (SELECT DISTINCT (SAL)
+ 11              FROM EMP
+ 12              ORDER BY SAL))
+ 13  WHERE ROWNUM = 10;
+
+no rows selected
+
+SQL> 
+Wrote file afiedt.buf
+
+  1  SELECT *
+  2  FROM (SELECT ROWNUM R1, SAL
+  3        FROM (SELECT DISTINCT (SAL)
+  4              FROM EMP
+  5              ORDER BY SAL DESC))
+  6  WHERE R1= 5
+  7  UNION
+  8  SELECT *
+  9  FROM (SELECT ROWNUM R1, SAL
+ 10        FROM (SELECT DISTINCT (SAL)
+ 11              FROM EMP
+ 12              ORDER BY SAL))
+ 13* WHERE R1= 10
+SQL> /
+
+        R1        SAL
+---------- ----------
+         5       2450
+        10       2975
+
+SQL> --2) WAY 2 ;
+SQL> 
+SQL> 
+SQL> SELECT *
+  2  FROM ( SELECT DISTINCT (SAL), DENSE_RANK () OVER (PARTITION BY SAL DESC)) R1
+  3  WHERE R1 = 5
+  4  UNION 
+  5  SELECT *
+  6  FROM ( SELECT DISTINCT (SAL), DENSE_RANK () OVER (PARTITION BY SAL)) R2
+  7  WHERE R2 = 10;
+FROM ( SELECT DISTINCT (SAL), DENSE_RANK () OVER (PARTITION BY SAL DESC)) R1
+                                                                   *
+ERROR at line 2:
+ORA-00907: missing right parenthesis
+
+
+SQL> 
+Wrote file afiedt.buf
+
+  1  SELECT *
+  2  FROM ( SELECT DISTINCT (SAL), DENSE_RANK () OVER (PARTITION BY SAL DESC) R1
+  3     FROM EMP)
+  4  WHERE R1 = 5
+  5  UNION
+  6  SELECT *
+  7  FROM ( SELECT DISTINCT (SAL), DENSE_RANK () OVER (PARTITION BY SAL) R2
+  8     FROM EMP)
+  9* WHERE R2 = 10
+SQL> /
+FROM ( SELECT DISTINCT (SAL), DENSE_RANK () OVER (PARTITION BY SAL DESC) R1
+                                                                   *
+ERROR at line 2:
+ORA-00907: missing right parenthesis
+
+
+SQL> 
+Wrote file afiedt.buf
+
+  1  SELECT *
+  2  FROM ( SELECT DISTINCT (SAL), DENSE_RANK () OVER (ORDER BY SAL DESC) R1
+  3     FROM EMP)
+  4  WHERE R1 = 5
+  5  UNION
+  6  SELECT *
+  7  FROM ( SELECT DISTINCT (SAL), DENSE_RANK () OVER (ORDER BY SAL) R2
+  8     FROM EMP)
+  9* WHERE R2 = 10
+SQL> /
+
+       SAL         R1
+---------- ----------
+      2450          5
+      2975         10
+
+SQL> 
