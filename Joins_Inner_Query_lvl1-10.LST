@@ -23,3 +23,338 @@ SQL> SELECT *
 14 rows selected.
 
 SQL> 
+SQL> --Q2. Show employee names along with their department locations
+SQL> 
+SQL> SELECT E.ENAME, D.DNAME
+  2  FROM EMP E INNER JOIN DEPT D
+  3  ON E.DEPTNO = D.DEPTNO;
+
+ENAME      DNAME
+---------- --------------
+SMITH      RESEARCH
+ALLEN      SALES
+WARD       SALES
+JONES      RESEARCH
+MARTIN     SALES
+BLAKE      SALES
+CLARK      ACCOUNTING
+SCOTT      RESEARCH
+KING       ACCOUNTING
+TURNER     SALES
+ADAMS      RESEARCH
+JAMES      SALES
+FORD       RESEARCH
+MILLER     ACCOUNTING
+
+14 rows selected.
+
+SQL> 
+SQL> 
+SQL> --Q3. Display all clerks with their department information
+SQL> 
+SQL> SELECT E.JOB, D.*
+  2  FROM EMP E INNER JOIN DEPT D
+  3  ON E.DEPTNO = D.DEPTNO
+  4  WHERE E.JOB = 'CLERK';
+
+JOB           DEPTNO DNAME          LOC
+--------- ---------- -------------- -------------
+CLERK             20 RESEARCH       DALLAS
+CLERK             20 RESEARCH       DALLAS
+CLERK             30 SALES          CHICAGO
+CLERK             10 ACCOUNTING     NEW YORK
+
+SQL> 
+SQL> 
+SQL> 
+SQL> --Q4. Find all employees in the SALES department
+SQL> 
+SQL> SELECT E.*, D.DNAME
+  2  FROM EMP E INNER JOIN DEPT D
+  3  ON E.DEPTNO = D.DEPTNO
+  4  WHERE DNAME = 'SALES';
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO DNAME
+---------- ---------- --------- ---------- --------- ---------- ---------- ---------- --------------
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30 SALES
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30 SALES
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30 SALES
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30 SALES
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30 SALES
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30 SALES
+
+6 rows selected.
+
+SQL> 
+SQL> 
+SQL> --Q5. List managers with their department names
+SQL> 
+SQL> SELECT E.ENAME, D.DNAME
+  2  FROM EMP E INNER JOIN DEPT D
+  3  ON E.DEPTNO = D.DEPTNO
+  4  WHERE JOB = 'MANAGER';
+
+ENAME      DNAME
+---------- --------------
+JONES      RESEARCH
+BLAKE      SALES
+CLARK      ACCOUNTING
+
+SQL> 
+SQL> 
+SQL> --Q6. Show employees earning more than 2000 with department locations
+SQL> 
+SQL> SELECT E.SAL, D.LOC
+  2  FROM EMP E INNER JOIN DEPT D
+  3  ON E.DEPTNO = D.DEPTNO
+  4  WHERE SAL > 2000;
+
+       SAL LOC
+---------- -------------
+      2975 DALLAS
+      2850 CHICAGO
+      2450 NEW YORK
+      3000 DALLAS
+      5000 NEW YORK
+      3000 DALLAS
+
+6 rows selected.
+
+SQL> 
+SQL> 
+SQL> --Q7. Find all analysts in the RESEARCH department
+SQL> 
+SQL> SELECT EMP.*, D.DNAME
+  2  FROM EMP E INNER JOIN DEPT D
+  3  ON E.DEPTNO = D.DEPTNO
+  4  WHERE E.JOB = 'ANALYST' AND D.DNAME = 'RESEARCH';
+SELECT EMP.*, D.DNAME
+           *
+ERROR at line 1:
+ORA-00904: "EMP": invalid identifier
+
+
+SQL> 
+Wrote file afiedt.buf
+
+  1  SELECT E.*, D.DNAME
+  2  FROM EMP E INNER JOIN DEPT D
+  3  ON E.DEPTNO = D.DEPTNO
+  4* WHERE E.JOB = 'ANALYST' AND D.DNAME = 'RESEARCH'
+SQL> /
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO DNAME
+---------- ---------- --------- ---------- --------- ---------- ---------- ---------- --------------
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20 RESEARCH
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20 RESEARCH
+
+SQL> 
+SQL> 
+SQL> --Q8. List employees in NEW YORK with their job titles
+SQL> 
+SQL> SELECT E.JOB, D.DNAME
+  2  FROM EMP E INNER JOIN DEPT D
+  3  ON E.DEPTNO = D.DEPTNO
+  4  WHERE D.DNAME = 'NEWYORK';
+
+no rows selected
+
+SQL> 
+Wrote file afiedt.buf
+
+  1  SELECT E.JOB, D.DNAME
+  2  FROM EMP E INNER JOIN DEPT D
+  3  ON E.DEPTNO = D.DEPTNO
+  4* WHERE D.DNAME = 'NEW YORK'
+SQL> /
+
+no rows selected
+
+SQL> SELECT E.ENAME, E.JOB, D.DNAME
+  2  FROM EMP E INNER JOIN DEPT D
+  3  ON E.DEPTNO = D.DEPTNO
+  4  WHERE D.LOC = 'NEW YORK';
+
+ENAME      JOB       DNAME
+---------- --------- --------------
+CLARK      MANAGER   ACCOUNTING
+KING       PRESIDENT ACCOUNTING
+MILLER     CLERK     ACCOUNTING
+
+SQL> 
+SQL> 
+SQL> --Q9. Show employees hired before 1982 with department info
+SQL> 
+SQL> SELECT E.*,D.*
+  2  FROM EMP E INNER JOIN DEPT D
+  3  ON E.DEPTNO = D.DEPTNO
+  4  WHERE E.HIREDATE < = '31-DEC-1981';
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO     DEPTNO DNAME          LOC
+---------- ---------- --------- ---------- --------- ---------- ---------- ---------- ---------- ---
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20         20 RESEARCH       DALLAS
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30         30 SALES          CHICAGO
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30         30 SALES          CHICAGO
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20         20 RESEARCH       DALLAS
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30         30 SALES          CHICAGO
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30         30 SALES          CHICAGO
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10         10 ACCOUNTING     NEW YORK
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10         10 ACCOUNTING     NEW YORK
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30         30 SALES          CHICAGO
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30         30 SALES          CHICAGO
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20         20 RESEARCH       DALLAS
+
+11 rows selected.
+
+SQL> 
+SQL> 
+SQL> --Q10. Count how many employees are in each department
+SQL> 
+SQL> SELECT COUNT(E.*) AS "EMPLOYEE_COUNT", D.DNAME
+  2  FROM EMP E INNER JOIN DEPT D
+  3  ON E.DEPTNO = D.DEPTNO
+  4  GROUP BY D.DNAME;
+SELECT COUNT(E.*) AS "EMPLOYEE_COUNT", D.DNAME
+               *
+ERROR at line 1:
+ORA-01747: invalid user.table.column, table.column, or column specification
+
+
+SQL> SELECT COUNT(E.EMPNO) AS EMPLOYEE_COUNT, D.DNAME
+  2  FROM EMP E INNER JOIN DEPT D
+  3  ON E.DEPTNO = D.DEPTNO
+  4  ORDER BY D.DNAME;
+SELECT COUNT(E.EMPNO) AS EMPLOYEE_COUNT, D.DNAME
+                                         *
+ERROR at line 1:
+ORA-00937: not a single-group group function
+
+
+SQL> 
+Wrote file afiedt.buf
+
+  1  SELECT COUNT(E.EMPNO) AS EMPLOYEE_COUNT, D.DNAME
+  2  FROM EMP E INNER JOIN DEPT D
+  3  ON E.DEPTNO = D.DEPTNO
+  4* GROUP BY D.DNAME
+SQL> /
+
+EMPLOYEE_COUNT DNAME
+-------------- --------------
+             3 ACCOUNTING
+             5 RESEARCH
+             6 SALES
+
+SQL> 
+SQL> 
+SQL> --Q11. Show average salary by department name
+SQL> 
+SQL> SELECT AVG(E.SAL), D.DNAME
+  2  FROM EMP E INNER JOIN DEPT D
+  3  ON E.DEPTNO = D.DEPTNO
+  4  GROUP BY D.DNAME;
+
+AVG(E.SAL) DNAME
+---------- --------------
+2916.66667 ACCOUNTING
+      2175 RESEARCH
+1566.66667 SALES
+
+SQL> 
+SQL> 
+SQL> --Q12. Find departments with more than 3 employees
+SQL> 
+SQL> SELECT D.DNAME, COUNT(E.EMPNO)
+  2  FROM EMP E INNER JOIN DEPT D
+  3  ON E.DEPTNO = D.DEPTNO
+  4  GROUP BY D.DNAME
+  5  HAVING COUNT(E.EMPNO) > 3;
+
+DNAME          COUNT(E.EMPNO)
+-------------- --------------
+RESEARCH                    5
+SALES                       6
+
+SQL> 
+SQL> 
+SQL> --Q13. List employees with their manager's names
+SQL> 
+SQL> SELECT E.ENAME, M.ENAME
+  2  FROM EMP E JOIN EMP M
+  3  ON E.MGR = M.EMPNO;
+
+ENAME      ENAME
+---------- ----------
+SMITH      FORD
+ALLEN      BLAKE
+WARD       BLAKE
+JONES      KING
+MARTIN     BLAKE
+BLAKE      KING
+CLARK      KING
+SCOTT      JONES
+TURNER     BLAKE
+ADAMS      SCOTT
+JAMES      BLAKE
+FORD       JONES
+MILLER     CLARK
+
+13 rows selected.
+
+SQL> 
+SQL> 
+SQL> --Q14. Show employees who earn more than their managers
+SQL> 
+SQL> SELECT E.ENAME
+  2  FROM EMP E JOIN EMP M
+  3  ON E.MGR = M.EMPNO
+  4  WHERE E.SAL > (SELECT SAL
+  5                 FROM EMP
+  6                 WHERE JOB = 'MANAGER');
+WHERE E.SAL > (SELECT SAL
+               *
+ERROR at line 4:
+ORA-01427: single-row subquery returns more than one row
+
+
+SQL> 
+Wrote file afiedt.buf
+
+  1  SELECT E.ENAME
+  2  FROM EMP E JOIN EMP M
+  3  ON E.MGR = M.EMPNO
+  4  WHERE E.SAL > IN (SELECT SAL
+  5                 FROM EMP
+  6*                WHERE JOB = 'MANAGER')
+SQL> /
+WHERE E.SAL > IN (SELECT SAL
+              *
+ERROR at line 4:
+ORA-00936: missing expression
+
+
+SQL> SELECT E.*
+  2  FROM EMP E JOIN EMP M
+  3  ON E.MGR = M.EMPNO
+  4  WHER E.SAL > M.SAL;
+WHER E.SAL > M.SAL
+*
+ERROR at line 4:
+ORA-00933: SQL command not properly ended
+
+
+SQL> 
+Wrote file afiedt.buf
+
+  1  SELECT E.*
+  2  FROM EMP E JOIN EMP M
+  3  ON E.MGR = M.EMPNO
+  4* WHERE E.SAL > M.SAL
+SQL> /
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20
+
+SQL> 
