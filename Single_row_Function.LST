@@ -1,0 +1,148 @@
+SELECT UPPER('kunal') FROM DUAL;
+
+UPPER                                                                                                                                                                                                   
+-----                                                                                                                                                                                                   
+KUNAL                                                                                                                                                                                                   
+
+SQL> SELECT LOWER('KUNAL') FROM DUAL;
+
+LOWER                                                                                                                                                                                                   
+-----                                                                                                                                                                                                   
+kunal                                                                                                                                                                                                   
+
+SQL> SELECT LOWER(ENAME) FROM EMP;
+
+LOWER(ENAM                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+smith                                                                                                                                                                                                   
+allen                                                                                                                                                                                                   
+ward                                                                                                                                                                                                    
+jones                                                                                                                                                                                                   
+martin                                                                                                                                                                                                  
+blake                                                                                                                                                                                                   
+clark                                                                                                                                                                                                   
+scott                                                                                                                                                                                                   
+king                                                                                                                                                                                                    
+turner                                                                                                                                                                                                  
+adams                                                                                                                                                                                                   
+james                                                                                                                                                                                                   
+ford                                                                                                                                                                                                    
+miller                                                                                                                                                                                                  
+
+14 rows selected.
+
+SQL> SELECT INITCAP(ENAME) FROM EMP;
+
+INITCAP(EN                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+Smith                                                                                                                                                                                                   
+Allen                                                                                                                                                                                                   
+Ward                                                                                                                                                                                                    
+Jones                                                                                                                                                                                                   
+Martin                                                                                                                                                                                                  
+Blake                                                                                                                                                                                                   
+Clark                                                                                                                                                                                                   
+Scott                                                                                                                                                                                                   
+King                                                                                                                                                                                                    
+Turner                                                                                                                                                                                                  
+Adams                                                                                                                                                                                                   
+James                                                                                                                                                                                                   
+Ford                                                                                                                                                                                                    
+Miller                                                                                                                                                                                                  
+
+14 rows selected.
+
+SQL> SELECT REVERSE(ENAME) FROM EMP;
+
+REVERSE(EN                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+HTIMS                                                                                                                                                                                                   
+NELLA                                                                                                                                                                                                   
+DRAW                                                                                                                                                                                                    
+SENOJ                                                                                                                                                                                                   
+NITRAM                                                                                                                                                                                                  
+EKALB                                                                                                                                                                                                   
+KRALC                                                                                                                                                                                                   
+TTOCS                                                                                                                                                                                                   
+GNIK                                                                                                                                                                                                    
+RENRUT                                                                                                                                                                                                  
+SMADA                                                                                                                                                                                                   
+SEMAJ                                                                                                                                                                                                   
+DROF                                                                                                                                                                                                    
+RELLIM                                                                                                                                                                                                  
+
+14 rows selected.
+
+SQL> SELECT LENGHT(ENAME) FROM EMP;
+SELECT LENGHT(ENAME) FROM EMP
+       *
+ERROR at line 1:
+ORA-00904: "LENGHT": invalid identifier 
+
+
+SQL> SELECT LENGTH(ENAME) FROM EMP;
+
+LENGTH(ENAME)                                                                                                                                                                                           
+-------------                                                                                                                                                                                           
+            5                                                                                                                                                                                           
+            5                                                                                                                                                                                           
+            4                                                                                                                                                                                           
+            5                                                                                                                                                                                           
+            6                                                                                                                                                                                           
+            5                                                                                                                                                                                           
+            5                                                                                                                                                                                           
+            5                                                                                                                                                                                           
+            4                                                                                                                                                                                           
+            6                                                                                                                                                                                           
+            5                                                                                                                                                                                           
+            5                                                                                                                                                                                           
+            4                                                                                                                                                                                           
+            6                                                                                                                                                                                           
+
+14 rows selected.
+
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE LENGTH(ENAME)=5;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20                                                                                                                   
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30                                                                                                                   
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                                                                                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                                                                                                   
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10                                                                                                                   
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20                                                                                                                   
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20                                                                                                                   
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30                                                                                                                   
+
+8 rows selected.
+
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE
+  4  
+SQL> 
+SQL> 
+SQL> SELECT REPLACE (ENAME, 'A', '$') FROM EMP;
+
+REPLACE(EN                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+SMITH                                                                                                                                                                                                   
+$LLEN                                                                                                                                                                                                   
+W$RD                                                                                                                                                                                                    
+JONES                                                                                                                                                                                                   
+M$RTIN                                                                                                                                                                                                  
+BL$KE                                                                                                                                                                                                   
+CL$RK                                                                                                                                                                                                   
+SCOTT                                                                                                                                                                                                   
+KING                                                                                                                                                                                                    
+TURNER                                                                                                                                                                                                  
+$D$MS                                                                                                                                                                                                   
+J$MES                                                                                                                                                                                                   
+FORD                                                                                                                                                                                                    
+MILLER                                                                                                                                                                                                  
+
+14 rows selected.
+
+SQL> 
